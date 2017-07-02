@@ -2,46 +2,111 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/baseContext"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/baseContext"
     android:background="@drawable/back1"
     tools:context="com.mirza.mab.thebrainganinapp.MainActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:fontFamily="Arial Rounded MT"
+        android:text="BRAIN GAIN"
+        android:textColor="@color/black"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:text="HOW GREATE IS YOUR BRAIN?"
+        android:textColor="@color/black"
+        android:textSize="23sp" />
+
     <Button
         android:id="@+id/button"
-        android:layout_width="150sp"
+        android:layout_width="160sp"
         android:layout_height="60sp"
-        android:layout_marginTop="194dp"
-        android:textSize="20sp"
-        android:background="@drawable/mybutton"
-
-        android:text="Singleplayer"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="194dp"
+        android:background="@drawable/mybutton"
+        android:onClick="singlePlay"
+        android:text="Singleplayer"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="150sp"
+        android:layout_width="160sp"
         android:layout_height="60sp"
-        android:text="Multiplayer"
-        android:background="@drawable/mybutton"
-        android:textSize="20sp"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/button"
         android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        android:layout_alignStart="@+id/button"
+        android:layout_below="@+id/button"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/mybutton"
+        android:onClick="multiPlay"
+        android:text="Multiplayer"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="120sp"
+        android:layout_width="160sp"
         android:layout_height="60sp"
-        android:text="settings"
-        android:textSize="20sp"
-        android:background="@drawable/mybutton"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/button2"
         android:layout_alignLeft="@+id/button2"
-        android:layout_alignStart="@+id/button2" />
+        android:layout_alignStart="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/mybutton"
+        android:onClick="settings"
+        android:text="Settings"
+        android:textSize="20sp" />
+
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/circleButton"
+        android:layout_width="90dip"
+        android:layout_height="90dip"
+        android:onClick="like"
+        android:src="@drawable/like"
+        app:cb_color="#000000"
+        app:cb_pressedRingWidth="8dip"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/button3"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/circleButton2"
+        android:layout_width="90dip"
+        android:layout_height="90dip"
+        android:onClick="share"
+        android:src="@drawable/share"
+        app:cb_color="#000000"
+        app:cb_pressedRingWidth="8dip"
+        android:layout_alignTop="@+id/circleButton3"
+        android:layout_marginTop="40sp"
+        android:layout_centerHorizontal="true" />
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/circleButton3"
+        android:layout_width="90dip"
+        android:layout_height="90dip"
+        android:onClick="info"
+        android:src="@drawable/info"
+        app:cb_color="#000000"
+        app:cb_pressedRingWidth="8dip"
+        android:layout_alignTop="@+id/circleButton"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
 
 </RelativeLayout>

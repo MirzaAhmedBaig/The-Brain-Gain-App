@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="success">#4CAF50</color>
+    <color name="warn">#f0ad4e</color>
+    <color name="primary">#337ab7</color>
+    <color name="basic">#f1f1f1</color>
 </resources>
