@@ -1,9 +1,9 @@
 package com.mirza.mab.thebrainganinapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,10 +42,18 @@ public class MainActivity extends Activity {
     }
 
     public void singlePlay(View v){
+        Intent intent =new Intent(this,SinglePlayer.class);
+        startActivity(intent);
 
     }
 
     public void multiPlay(View v){
+
+    }
+
+    public void settings(View v){
+//        Intent intent=new Intent(this,MultiPlayer.class);
+//        startActivity(intent);
 
     }
 
