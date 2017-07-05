@@ -8,7 +8,7 @@ import android.view.View;
  */
 
 public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
-    private static final float MIN_SCALE = 0.85f;
+    private static final float MIN_SCALE = 0.75f;
     private static final float MIN_ALPHA = 0.5f;
 
     public void transformPage(View view, float position) {
@@ -41,7 +41,7 @@ public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
 
         } else { // (1,+Infinity]
             // This page is way off-screen to the right.
-            view.setAlpha(0);
+            view.setAlpha(1);
         }
     }
 }

@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        );
     }
 
     public void onViewInitialized() {
@@ -41,23 +41,23 @@ public class MainActivity extends Activity {
         settings = (Button) findViewById(R.id.button3);
     }
 
-    public void singlePlay(View v){
-        Intent intent =new Intent(this,SinglePlayer.class);
+    public void singlePlay(View v) {
+        Intent intent = new Intent(this, SinglePlayer.class);
         startActivity(intent);
 
     }
 
-    public void multiPlay(View v){
+    public void multiPlay(View v) {
 
     }
 
-    public void settings(View v){
+    public void settings(View v) {
 //        Intent intent=new Intent(this,MultiPlayer.class);
 //        startActivity(intent);
 
     }
 
-    public void like(View v){
+    public void like(View v) {
 
     }
 
@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        );
         return super.onTouchEvent(event);
     }
 

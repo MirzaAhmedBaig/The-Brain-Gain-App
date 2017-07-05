@@ -2,6 +2,7 @@ package com.mirza.mab.thebrainganinapp;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
@@ -23,7 +24,7 @@ public class SinglePlayer extends AppCompatActivity {
     PagerContainer mContainer;
     ViewPager pager;
     TextView level;
-    int maxLevel = 5;
+    int levelNo = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,9 @@ public class SinglePlayer extends AppCompatActivity {
         PagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(adapter.getCount());
-        pager.setPageMargin(60);
 
         pager.setClipChildren(true);
+        pager.setClipToPadding(false);
 
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -54,7 +55,8 @@ public class SinglePlayer extends AppCompatActivity {
 
             @SuppressLint("SetTextI18n")
             public void onPageSelected(int position) {
-                level.setText("Level " + (position + 1));
+                levelNo = position + 1;
+                level.setText("Level " + (levelNo));
             }
         });
 
@@ -71,7 +73,7 @@ public class SinglePlayer extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        );
 
     }
 
@@ -84,12 +86,27 @@ public class SinglePlayer extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        );
         return super.onTouchEvent(event);
     }
 
     public void play(View v) {
-        Toast.makeText(getBaseContext(), "Play", Toast.LENGTH_LONG).show();
+        Intent intent;
+        switch (levelNo) {
+
+            case 1:
+                intent = new Intent(this, Level_1.class);
+                startActivity(intent);
+            case 2:
+                intent = new Intent(this, Level_2.class);
+                startActivity(intent);
+            case 3:
+                Toast.makeText(getBaseContext(), "Play", Toast.LENGTH_LONG).show();
+            case 4:
+                Toast.makeText(getBaseContext(), "Play", Toast.LENGTH_LONG).show();
+        }
+
+
     }
 
     public void next(View v) {
