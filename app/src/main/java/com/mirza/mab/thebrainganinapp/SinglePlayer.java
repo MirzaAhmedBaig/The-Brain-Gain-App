@@ -116,17 +116,17 @@ public class SinglePlayer extends AppCompatActivity {
             switch (pos) {
 
                 case 0:
-                    return Levels.newInstance("Level 1", 1);
+                    return Levels.newInstance("flash1", 1);
                 case 1:
-                    return Levels.newInstance("Level 2", 2);
+                    return Levels.newInstance("flas2", 2);
                 case 2:
-                    return Levels.newInstance("Level 3", 3);
+                    return Levels.newInstance("flash1", 3);
                 case 3:
-                    return Levels.newInstance("Level 4", 4);
+                    return Levels.newInstance("flas2", 4);
                 case 4:
-                    return Levels.newInstance("Level 5", 5);
+                    return Levels.newInstance("flash1", 5);
                 default:
-                    return Levels.newInstance("Level 6", 6);
+                    return Levels.newInstance("flas2", 6);
             }
         }
 

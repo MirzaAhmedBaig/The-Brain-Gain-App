@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,6 @@ public class MainActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-
     }
 
     public void onViewInitialized() {
@@ -61,10 +61,6 @@ public class MainActivity extends Activity {
 
     }
 
-    public void share(View v){
-
-    }
-
     public void info(View v) {
 
     }
@@ -79,4 +75,14 @@ public class MainActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         return super.onTouchEvent(event);
     }
+
+    public void share(View view) {
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String shareBodyText = "I love The Brain Gain App...! \n This is the best game i ever played.\nhttp://mirzaahmed.tk/bgapp.apk";
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "The Brain Gain App");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+        startActivity(Intent.createChooser(intent, "Choose sharing method"));
+    }
+
 }

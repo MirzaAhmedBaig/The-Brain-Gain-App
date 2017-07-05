@@ -1,43 +1,78 @@
 package com.mirza.mab.thebrainganinapp;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Dimension;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class Levels extends Fragment {
+public class Levels extends Fragment implements View.OnClickListener {
 
     private View baseContext;
+    private RatingBar ratingBar;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_levels, container, false);
 
-        TextView tv = (TextView) v.findViewById(R.id.tvFragFirst);
-        baseContext=v.findViewById(R.id.baseContext);
+        baseContext = v.findViewById(R.id.baseContext);
+//        ratingBar=(RatingBar)v.findViewById(R.id.ratingBar);
+//        ratingBar.setStarsSeparation(100, Dimension.PX);
+//        ratingBar.animate();
+//        ratingBar.setCameraDistance(2);
 
-        tv.setText(getArguments().getString("msg"));
-        tv.setGravity(Gravity.CENTER);
-        tv.setBackgroundColor(Color.argb(255, getArguments().getInt("no") * 50, getArguments().getInt("no") * 10, getArguments().getInt("no") * 50));
-        baseContext.setBackgroundColor(Color.argb(255, getArguments().getInt("no") * 50, getArguments().getInt("no") * 10, getArguments().getInt("no") * 50));
+        baseContext.setOnClickListener(this);
+        int resID = getResources().getIdentifier(getArguments().getString("back"), "drawable", "com.mirza.mab.thebrainganinapp");
+//        baseContext.setBackgroundResource(resID);
 
         return v;
     }
 
-    public static Levels newInstance(String text,int position) {
+    public static Levels newInstance(String text, int position) {
 
         Levels f = new Levels();
         Bundle b = new Bundle();
-        b.putString("msg", text);
-        b.putInt("no",position);
+        b.putString("back", text);
+        b.putInt("level", position);
 
         f.setArguments(b);
 
         return f;
     }
 
+    @Override
+    public void onClick(View v) {
+        if (getArguments().getInt("level") == 1) {
+            Intent intent=new Intent(getContext(),Level_1.class);
+            startActivity(intent);
+        } else if (getArguments().getInt("level") == 2) {
+            Intent intent=new Intent(getContext(),Level_2.class);
+            startActivity(intent);
+
+        } else if (getArguments().getInt("level") == 3) {
+            Toast.makeText(getContext(), "Level 3", Toast.LENGTH_SHORT).show();
+
+        } else if (getArguments().getInt("level") == 4) {
+            Toast.makeText(getContext(), "Level 4", Toast.LENGTH_SHORT).show();
+
+        } else if (getArguments().getInt("level") == 5) {
+            Toast.makeText(getContext(), "Level 5", Toast.LENGTH_SHORT).show();
+
+        } else if (getArguments().getInt("level") == 6) {
+            Toast.makeText(getContext(), "Level 6", Toast.LENGTH_SHORT).show();
+
+        }
+    }
 }
