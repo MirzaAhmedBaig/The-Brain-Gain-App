@@ -2,6 +2,7 @@ package com.mirza.mab.thebrainganinapp;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -14,30 +15,36 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Level_1 extends AppCompatActivity {
 
     private View baseContext;
+    private GridView gridview;
+    private View frame1, frame2, frame3, fram4;
+    private int oncePosition = 0;
+    private int playing = 0;
+    MyDialogue dialogue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_1);
-        baseContext = findViewById(R.id.baseContext);
-        GridView gridview = (GridView) findViewById(R.id.gridview);
+        nViewInitialized();
+
         gridview.setAdapter(new ImageAdapter(this));
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(Level_1.this, "h" + position,
-                        Toast.LENGTH_SHORT).show();
-            }
 
-        });
+    }
 
-
+    public void nViewInitialized() {
+        baseContext = findViewById(R.id.baseContext);
+        frame1 = findViewById(R.id.frame1);
+        frame2 = findViewById(R.id.frame2);
+        gridview = (GridView) findViewById(R.id.gridview);
+        double pos = Math.random() * 22;
+        oncePosition = (int) pos;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
@@ -65,8 +72,16 @@ public class Level_1 extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        if (playing == 1) {
+            dialogue = new MyDialogue(Level_1.this);
+            dialogue.show();
+        }
+    }
 
-        super.onBackPressed();
+    public void round1(View v) {
+        frame1.setVisibility(View.GONE);
+        playing = 1;
+        frame2.setVisibility(View.VISIBLE);
     }
 
     public class ImageAdapter extends BaseAdapter {
@@ -88,8 +103,8 @@ public class Level_1 extends AppCompatActivity {
             return 0;
         }
 
-        public View getView(int position, View convertView, ViewGroup parent) {
-            Button button;
+        public View getView(final int position, View convertView, final ViewGroup parent) {
+            final Button button;
             if (convertView == null) {
                 button = new Button(mContext);
                 button.setLayoutParams(new GridView.LayoutParams(85, 85));
@@ -97,12 +112,26 @@ public class Level_1 extends AppCompatActivity {
                 button = (Button) convertView;
             }
 
-            button.setText("7");
+            if (position == oncePosition) {
+                button.setText("1");
+            } else {
+                button.setText("7");
+            }
             button.setTextColor(Color.BLACK);
             int resID = getResources().getIdentifier("button", "drawable", "com.mirza.mab.thebrainganinapp");
             button.setBackgroundResource(resID);
+            button.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(Level_1.this, button.getText(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
             return button;
         }
 
     }
+
+
 }

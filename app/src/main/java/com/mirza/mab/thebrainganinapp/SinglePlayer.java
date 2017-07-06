@@ -97,13 +97,17 @@ public class SinglePlayer extends AppCompatActivity {
             case 1:
                 intent = new Intent(this, Level_1.class);
                 startActivity(intent);
+                break;
             case 2:
                 intent = new Intent(this, Level_2.class);
                 startActivity(intent);
+                break;
             case 3:
-                Toast.makeText(getBaseContext(), "Play", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "level3", Toast.LENGTH_LONG).show();
+                break;
             case 4:
-                Toast.makeText(getBaseContext(), "Play", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "level4", Toast.LENGTH_LONG).show();
+                break;
         }
 
 
