@@ -3,6 +3,7 @@ package com.mirza.mab.thebrainganinapp;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -131,6 +132,24 @@ public class Level_1 extends AppCompatActivity {
             return button;
         }
 
+    }
+
+    public class BackgroundProgress extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute(){
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+
+        }
     }
 
 
