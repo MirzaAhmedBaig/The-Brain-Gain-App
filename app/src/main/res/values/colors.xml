@@ -9,4 +9,5 @@
     <color name="warn">#f0ad4e</color>
     <color name="primary">#337ab7</color>
     <color name="basic">#f1f1f1</color>
+    <color name="lightText">#333333</color>
 </resources>

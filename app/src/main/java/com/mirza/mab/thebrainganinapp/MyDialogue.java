@@ -12,7 +12,7 @@ public class MyDialogue extends Dialog implements
 
     public Activity c;
     public Dialog d;
-    public Button yes, no;
+    public Button yes, no,restart;
 
     public MyDialogue(Activity a) {
         super(a);
@@ -27,8 +27,10 @@ public class MyDialogue extends Dialog implements
         setContentView(R.layout.sample_my_dialogue);
         yes = (Button) findViewById(R.id.btn_yes);
         no = (Button) findViewById(R.id.btn_no);
+        restart= (Button) findViewById(R.id.button4);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
+        restart.setOnClickListener(this);
 
     }
 
@@ -40,6 +42,9 @@ public class MyDialogue extends Dialog implements
                 break;
             case R.id.btn_no:
                 dismiss();
+                break;
+            case R.id.button4:
+                c.recreate();
                 break;
             default:
                 break;
