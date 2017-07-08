@@ -23,8 +23,11 @@ public class SinglePlayer extends AppCompatActivity {
     private View baseContext;
     PagerContainer mContainer;
     ViewPager pager;
-    TextView level;
+    TextView level,stars;
     int levelNo = 1;
+    public static DatabaseHandler dbHandler;
+    int maxLevel=1;
+    int lock=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class SinglePlayer extends AppCompatActivity {
 
         baseContext = findViewById(R.id.baseContext);
         level = (TextView) findViewById(R.id.textView2);
+        stars=(TextView)findViewById(R.id.textView4);
         mContainer = (PagerContainer) findViewById(R.id.pager_container);
 
         pager = mContainer.getViewPager();
@@ -60,6 +64,10 @@ public class SinglePlayer extends AppCompatActivity {
             }
         });
 
+        dbHandler=new DatabaseHandler(this);
+        dbHandler.addLevel(1,0);
+        maxLevel=dbHandler.getMaxLevel();
+        stars.setText("Stars: "+dbHandler.getScore(1));
 
     }
 
@@ -76,6 +84,12 @@ public class SinglePlayer extends AppCompatActivity {
         );
 
     }
+
+    @SuppressLint("MissingSuperCall")
+    public void refresh(){
+        this.recreate();
+    }
+
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
@@ -134,20 +148,50 @@ public class SinglePlayer extends AppCompatActivity {
         }
 
         public Fragment getItem(int pos) {
+            float stars=dbHandler.getScore(pos+1);
             switch (pos) {
-
                 case 0:
-                    return Levels.newInstance("flash1", 1);
+                    if((pos+1)<=maxLevel){
+                        lock=0;
+                    }else {
+                        lock=1;
+                    }
+                    return Levels.newInstance("l1", 1,lock,stars);
                 case 1:
-                    return Levels.newInstance("flas2", 2);
+                    if((pos+1)<=maxLevel){
+                        lock=0;
+                    }else {
+                        lock=1;
+                    }
+                    return Levels.newInstance("flas2", 2,lock,stars);
                 case 2:
-                    return Levels.newInstance("flash1", 3);
+                    if((pos+1)<=maxLevel){
+                        lock=0;
+                    }else {
+                        lock=1;
+                    }
+                    return Levels.newInstance("flash1", 3,lock,stars);
                 case 3:
-                    return Levels.newInstance("flas2", 4);
+                    if((pos+1)<=maxLevel){
+                        lock=0;
+                    }else {
+                        lock=1;
+                    }
+                    return Levels.newInstance("flas2", 4,lock,stars);
                 case 4:
-                    return Levels.newInstance("flash1", 5);
+                    if((pos+1)<=maxLevel){
+                        lock=0;
+                    }else {
+                        lock=1;
+                    }
+                    return Levels.newInstance("flash1", 5,lock,stars);
                 default:
-                    return Levels.newInstance("flas2", 6);
+                    if((pos+1)<=maxLevel){
+                        lock=0;
+                    }else {
+                        lock=1;
+                    }
+                    return Levels.newInstance("flas2", 6,lock,stars);
             }
         }
 

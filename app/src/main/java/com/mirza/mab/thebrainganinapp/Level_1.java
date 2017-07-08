@@ -29,7 +29,7 @@ public class Level_1 extends AppCompatActivity {
     private GridView gridview;
     private MyDialogue dialogue;
     private ProgressBar progressBar;
-    private View descriptPan, gamePan, errorPan, retryPan,resultPan;
+    private View descriptPan, gamePan, errorPan, retryPan, resultPan;
     private TextView heading, subHeading, msg, roundMsg, roundMsg1;
     private RatingBar ratingBar;
     private int oncePosition = 0, roundNo = 1;
@@ -37,6 +37,9 @@ public class Level_1 extends AppCompatActivity {
     private boolean stop = false, playing = false, lost = false;
     private Handler handler;
     private Thread progressThread;
+    int score = 0;
+    private static int totalRounds = 4;
+    DatabaseHandler dbHandler = SinglePlayer.dbHandler;
 
 
     @Override
@@ -61,7 +64,7 @@ public class Level_1 extends AppCompatActivity {
         msg = (TextView) findViewById(R.id.textView7);
         roundMsg = (TextView) findViewById(R.id.textView8);
         roundMsg1 = (TextView) findViewById(R.id.textView13);
-        ratingBar= (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         handler = new Handler();
 
     }
@@ -267,9 +270,9 @@ public class Level_1 extends AppCompatActivity {
     }
 
     public void onError(int roundNo) {
-        stop=true;
+        stop = true;
         errorPan.setVisibility(View.VISIBLE);
-        roundMsg1.setText("Round "+roundNo+" sof 4");
+        roundMsg1.setText("Round " + roundNo + " sof 4");
     }
 
     public void mainMenu(View v) {
@@ -327,6 +330,7 @@ public class Level_1 extends AppCompatActivity {
                     switch (roundNo) {
                         case 1:
                             if (button.getText().toString().equals("1")) {
+                                score = score + progressBar.getProgress();
                                 stop = true;
                                 heading.setText("CONGRATS !");
                                 subHeading.setText("Now find and tap number 3");
@@ -340,6 +344,7 @@ public class Level_1 extends AppCompatActivity {
                             break;
                         case 2:
                             if (button.getText().toString().equals("3")) {
+                                score = score + progressBar.getProgress();
                                 stop = true;
                                 heading.setText("CONGRATS !");
                                 subHeading.setText("Now find and tap number O");
@@ -353,6 +358,7 @@ public class Level_1 extends AppCompatActivity {
                             break;
                         case 3:
                             if (button.getText().toString().equals("O")) {
+                                score = score + progressBar.getProgress();
                                 stop = true;
                                 heading.setText("CONGRATS !");
                                 subHeading.setText("Now find and tap number 8");
@@ -366,10 +372,33 @@ public class Level_1 extends AppCompatActivity {
                             break;
                         case 4:
                             if (button.getText().toString().equals("8")) {
+                                score = score + progressBar.getProgress();
                                 stop = true;
+                                score = score / totalRounds;
+                                score++;
+                                if (score <= 1 && score <= 20) {
+                                    score = 5;
+                                } else if (score <= 21 && score <= 40) {
+                                    score = 4;
+                                } else if (score <= 41 && score <= 60) {
+                                    score = 3;
+                                } else if (score <= 61 && score <= 80) {
+                                    score = 2;
+                                } else if (score <= 81 && score <= 99) {
+                                    score = 1;
+                                }
+
+                                if (dbHandler.getLock(1) == 1) {
+                                    if (score > dbHandler.getScore(1)) {
+                                        dbHandler.updateScore(1, score);
+                                    }
+                                } else {
+                                    dbHandler.updateScore(1, score);
+                                    dbHandler.updateLock(1, score,1);
+                                }
+                                dbHandler.addLevel(2,0);
                                 gamePan.setVisibility(View.GONE);
                                 resultPan.setVisibility(View.VISIBLE);
-                                ratingBar.setRating(4.0f);
                                 roundNo = 4;
                             } else {
                                 onError(4);

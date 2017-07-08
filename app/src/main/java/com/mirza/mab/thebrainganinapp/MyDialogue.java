@@ -27,7 +27,7 @@ public class MyDialogue extends Dialog implements
         setContentView(R.layout.sample_my_dialogue);
         yes = (Button) findViewById(R.id.btn_yes);
         no = (Button) findViewById(R.id.btn_no);
-        restart= (Button) findViewById(R.id.button4);
+        restart= (Button) findViewById(R.id.btn_restart);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
         restart.setOnClickListener(this);
@@ -43,7 +43,7 @@ public class MyDialogue extends Dialog implements
             case R.id.btn_no:
                 dismiss();
                 break;
-            case R.id.button4:
+            case R.id.btn_restart:
                 c.recreate();
                 break;
             default:
