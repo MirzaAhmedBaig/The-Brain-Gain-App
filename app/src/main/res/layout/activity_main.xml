@@ -15,7 +15,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="39dp"
-        android:fontFamily="Arial Rounded MT"
         android:text="BRAIN GAIN"
         android:textColor="@color/black"
         android:textSize="60sp"
@@ -63,8 +62,8 @@
         android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
         android:layout_below="@+id/button2"
-        android:layout_marginTop="24dp"
         android:layout_marginBottom="0dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/mybutton"
         android:onClick="settings"
         android:text="Settngs"
@@ -75,38 +74,38 @@
         android:id="@+id/circleButton"
         android:layout_width="80dip"
         android:layout_height="80dip"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/button3"
+        android:layout_marginTop="11dp"
         android:onClick="like"
         android:src="@drawable/like"
         app:cb_color="#000000"
-        app:cb_pressedRingWidth="8dip"
-        android:layout_marginTop="11dp"
-        android:layout_below="@+id/button3"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        app:cb_pressedRingWidth="8dip" />
 
     <at.markushi.ui.CircleButton
         android:id="@+id/circleButton2"
         android:layout_width="80dip"
         android:layout_height="80dip"
+        android:layout_alignTop="@+id/circleButton3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40sp"
+        android:actionProviderClass="android.widget.ShareActionProvider"
         android:onClick="share"
         android:src="@drawable/share"
         app:cb_color="#000000"
-        app:cb_pressedRingWidth="8dip"
-        android:layout_alignTop="@+id/circleButton3"
-        android:layout_marginTop="40sp"
-        android:layout_centerHorizontal="true"
-        android:actionProviderClass="android.widget.ShareActionProvider" />
+        app:cb_pressedRingWidth="8dip" />
 
     <at.markushi.ui.CircleButton
         android:id="@+id/circleButton3"
         android:layout_width="80dip"
         android:layout_height="80dip"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignTop="@+id/circleButton"
         android:onClick="info"
         android:src="@drawable/info"
         app:cb_color="#000000"
-        app:cb_pressedRingWidth="8dip"
-        android:layout_alignTop="@+id/circleButton"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        app:cb_pressedRingWidth="8dip" />
 
 </RelativeLayout>

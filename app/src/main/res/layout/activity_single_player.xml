@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
-        android:text="Level 1"
+        android:text="LEVEL 1"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />

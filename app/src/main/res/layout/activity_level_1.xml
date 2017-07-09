@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="0dp"
-    android:background="@drawable/play1"
+    android:background="@color/basic"
     android:paddingTop="0sp"
     tools:context="com.mirza.mab.thebrainganinapp.Level_1">
 
@@ -41,7 +41,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/textView5"
             android:layout_marginTop="162dp"
-            android:fontFamily="fontFamily: sans-serif-thin"
             android:text="Find and tap the number 1"
             android:textAlignment="center"
             android:textColor="@color/lightText"
@@ -131,7 +130,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="189dp"
-            app:srcCompat="@android:drawable/ic_delete" />
+            app:srcCompat="@drawable/error" />
 
         <TextView
             android:id="@+id/textView12"
@@ -254,15 +253,15 @@
             android:textSize="35dp" />
 
         <RatingBar
-            android:id="@+id/ratingBar"
-            style="@style/CustomRatingBar"
+            android:id="@+id/congoRatingBar"
+            style="@style/CongoRatingBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView15"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:clickable="false"
             android:isIndicator="true"
@@ -273,18 +272,17 @@
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ratingBar"
+            android:layout_below="@+id/congoRatingBar"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="86dp"
-            android:text="You have good eye!"
+            android:text="Be faster for more stars!"
             android:textColor="@color/lightText"
             android:textSize="25sp" />
 
-        <ImageButton
+        <at.markushi.ui.CircleButton
             android:id="@+id/button8"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:background="@drawable/mybutton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/replay"
             android:onClick="restartGame"
             android:layout_alignParentBottom="true"
@@ -292,16 +290,15 @@
             android:layout_toStartOf="@+id/textView14"
             android:layout_marginBottom="68dp" />
 
-        <ImageButton
+        <at.markushi.ui.CircleButton
             android:id="@+id/button9"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignTop="@+id/button8"
             android:layout_marginLeft="11dp"
             android:layout_marginStart="11dp"
             android:layout_toEndOf="@+id/textView14"
             android:layout_toRightOf="@+id/textView14"
-            android:background="@drawable/mybutton"
             android:src="@drawable/next" />
 
 

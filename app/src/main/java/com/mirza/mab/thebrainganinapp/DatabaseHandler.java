@@ -48,7 +48,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(LEVEL_NO, level);
         values.put(LEVEL_STARS, stars);
-        values.put(LEVEL_LOCK,0);
 
         database.insert(TABLE_SCORE, null, values);
         database.close();
@@ -135,13 +134,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return lock;
     }
 
-    public void updateLock(int level, int lock, int score) {
+    public void updateLock(int level, int score) {
         SQLiteDatabase database = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(LEVEL_NO, level);
         values.put(LEVEL_STARS, score);
-        values.put(LEVEL_LOCK, lock);
+        values.put(LEVEL_LOCK, 1);
 
         database.update(TABLE_SCORE, values, LEVEL_NO + " = " + level, null);
         database.close();

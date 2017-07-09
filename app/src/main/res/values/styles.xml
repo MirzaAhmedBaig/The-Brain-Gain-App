@@ -15,6 +15,11 @@
         <item name="android:minHeight">30dp</item>
         <item name="android:maxHeight">30dp</item>
     </style>
+    <style name="CongoRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/congo_rating</item>
+        <item name="android:minHeight">80dp</item>
+        <item name="android:maxHeight">80dp</item>
+    </style>
     <style name="AppTheme.WhiteAccent">
         <item name="colorAccent">@color/black</item> <!-- Whatever color you want-->
     </style>

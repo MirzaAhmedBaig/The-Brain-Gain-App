@@ -2,6 +2,7 @@ package com.mirza.mab.thebrainganinapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.os.Bundle;
@@ -9,11 +10,16 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends Activity {
 
     private View baseContext;
     private Button splay, mplay, settings, share, info, like;
+    private TextView heading,subHeading;
+    public static Typeface type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +42,14 @@ public class MainActivity extends Activity {
     }
 
     public void onViewInitialized() {
+        heading=(TextView)findViewById(R.id.textView);
+        subHeading=(TextView)findViewById(R.id.textView3);
         splay = (Button) findViewById(R.id.button);
         mplay = (Button) findViewById(R.id.button2);
         settings = (Button) findViewById(R.id.button3);
+        Typeface type=Typeface.createFromAsset(getAssets(), "round.ttf");
+        heading.setTypeface(type);
+        subHeading.setTypeface(type);
     }
 
     public void singlePlay(View v) {

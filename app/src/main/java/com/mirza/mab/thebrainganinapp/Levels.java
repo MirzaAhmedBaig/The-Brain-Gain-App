@@ -21,6 +21,7 @@ public class Levels extends Fragment implements View.OnClickListener {
 
     private View baseContext, lockedLevels;
     private RatingBar ratingBar;
+    private MessagePane pane;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override

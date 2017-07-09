@@ -28,6 +28,7 @@ public class SinglePlayer extends AppCompatActivity {
     public static DatabaseHandler dbHandler;
     int maxLevel=1;
     int lock=1;
+    MessagePane pane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class SinglePlayer extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             public void onPageSelected(int position) {
                 levelNo = position + 1;
-                level.setText("Level " + (levelNo));
+                level.setText("LEVEL " + (levelNo));
             }
         });
 
@@ -88,6 +89,12 @@ public class SinglePlayer extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     public void refresh(){
         this.recreate();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+//        this.recreate();
     }
 
 
@@ -196,6 +203,11 @@ public class SinglePlayer extends AppCompatActivity {
         }
 
 
+    }
+
+    public void levelLockedMsg(View v){
+        pane = new MessagePane(SinglePlayer.this,"Level Locked!","You don't have enough stars to play this level");
+        pane.show();
     }
 
 

@@ -1,8 +1,11 @@
 package com.mirza.mab.thebrainganinapp;
 
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -30,7 +33,7 @@ public class Level_1 extends AppCompatActivity {
     private MyDialogue dialogue;
     private ProgressBar progressBar;
     private View descriptPan, gamePan, errorPan, retryPan, resultPan;
-    private TextView heading, subHeading, msg, roundMsg, roundMsg1;
+    private TextView heading, subHeading, msg, roundMsg, roundMsg1, resultMsg;
     private RatingBar ratingBar;
     private int oncePosition = 0, roundNo = 1;
     private int progressStatus = 0;
@@ -40,6 +43,9 @@ public class Level_1 extends AppCompatActivity {
     int score = 0;
     private static int totalRounds = 4;
     DatabaseHandler dbHandler = SinglePlayer.dbHandler;
+    private Object mPauseLock;
+    private boolean mPaused;
+    private boolean mFinished;
 
 
     @Override
@@ -64,7 +70,11 @@ public class Level_1 extends AppCompatActivity {
         msg = (TextView) findViewById(R.id.textView7);
         roundMsg = (TextView) findViewById(R.id.textView8);
         roundMsg1 = (TextView) findViewById(R.id.textView13);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        resultMsg = (TextView) findViewById(R.id.textView16);
+        ratingBar = (RatingBar) findViewById(R.id.congoRatingBar);
+        mPauseLock = new Object();
+        mPaused = false;
+        mFinished = false;
         handler = new Handler();
 
     }
@@ -95,6 +105,7 @@ public class Level_1 extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (playing) {
+            onPause();
             dialogue = new MyDialogue(Level_1.this);
             dialogue.show();
         } else {
@@ -102,8 +113,26 @@ public class Level_1 extends AppCompatActivity {
         }
     }
 
+//    @SuppressLint("MissingSuperCall")
+//    public void onPause() {
+//        synchronized (mPauseLock) {
+//            mPaused = true;
+//        }
+//    }
+//
+//    /**
+//     * Call this on resume.
+//     */
+//    @SuppressLint("MissingSuperCall")
+//    public void onResume() {
+//        synchronized (mPauseLock) {
+//            mPaused = false;
+//            mPauseLock.notifyAll();
+//        }
+//    }
+
     public void rounds(View v) {
-        double pos = Math.random() * 22;
+        double pos = Math.random() * 83;
         oncePosition = (int) pos;
         progressStatus = 0;
         stop = false;
@@ -141,10 +170,20 @@ public class Level_1 extends AppCompatActivity {
                                     }
                                 }
                             });
+
+                            synchronized (mPauseLock) {
+                                while (mPaused) {
+                                    try {
+                                        mPauseLock.wait();
+                                    } catch (InterruptedException e) {
+                                    }
+                                }
+                            }
                         }
                     }
                 });
                 progressThread.start();
+
                 break;
             case 2:
                 descriptPan.setVisibility(View.GONE);
@@ -272,7 +311,7 @@ public class Level_1 extends AppCompatActivity {
     public void onError(int roundNo) {
         stop = true;
         errorPan.setVisibility(View.VISIBLE);
-        roundMsg1.setText("Round " + roundNo + " sof 4");
+        roundMsg1.setText("Round " + roundNo + " of 4");
     }
 
     public void mainMenu(View v) {
@@ -320,7 +359,8 @@ public class Level_1 extends AppCompatActivity {
             } else {
                 button.setText(value);
             }
-            button.setTextColor(Color.rgb(34, 34, 34));
+            button.setTextColor(Color.rgb(80, 80, 80));
+            button.setTextSize(16);
             int resID = getResources().getIdentifier("button", "drawable", "com.mirza.mab.thebrainganinapp");
             button.setBackgroundResource(resID);
             button.setOnClickListener(new View.OnClickListener() {
@@ -378,28 +418,36 @@ public class Level_1 extends AppCompatActivity {
                                 score++;
                                 if (score <= 1 && score <= 20) {
                                     score = 5;
+                                    resultMsg.setText("You have good eye!");
                                 } else if (score <= 21 && score <= 40) {
+                                    resultMsg.setText("Be faster for more stars!");
                                     score = 4;
                                 } else if (score <= 41 && score <= 60) {
                                     score = 3;
+                                    resultMsg.setText("Be faster for more stars!");
                                 } else if (score <= 61 && score <= 80) {
                                     score = 2;
+                                    resultMsg.setText("Be faster for more stars!");
                                 } else if (score <= 81 && score <= 99) {
                                     score = 1;
+                                    resultMsg.setText("Be faster for more stars!");
                                 }
 
-                                if (dbHandler.getLock(1) == 1) {
-                                    if (score > dbHandler.getScore(1)) {
-                                        dbHandler.updateScore(1, score);
-                                    }
-                                } else {
+                                if (dbHandler.getScore(1) == 0) {
                                     dbHandler.updateScore(1, score);
-                                    dbHandler.updateLock(1, score,1);
                                 }
-                                dbHandler.addLevel(2,0);
+                                if (dbHandler.getScore(1) < score) {
+                                    dbHandler.updateScore(1, score);
+                                }
+                                dbHandler.addLevel(2, 0);
                                 gamePan.setVisibility(View.GONE);
+//                                ratingBar.setRating(score);
+                                ObjectAnimator anim = ObjectAnimator.ofFloat(ratingBar, "rating", 0, score);
+                                anim.setDuration(4000);
+                                anim.start();
                                 resultPan.setVisibility(View.VISIBLE);
                                 roundNo = 4;
+                                playing = false;
                             } else {
                                 onError(4);
                             }
