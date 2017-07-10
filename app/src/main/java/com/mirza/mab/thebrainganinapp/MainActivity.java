@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,36 +20,27 @@ public class MainActivity extends Activity {
 
     private View baseContext;
     private Button splay, mplay, settings, share, info, like;
-    private TextView heading,subHeading;
+    private TextView heading, subHeading;
     public static Typeface type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         baseContext = findViewById(R.id.baseContext);
         onViewInitialized();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        baseContext.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        );
-    }
-
     public void onViewInitialized() {
-        heading=(TextView)findViewById(R.id.textView);
-        subHeading=(TextView)findViewById(R.id.textView3);
+        heading = (TextView) findViewById(R.id.textView);
+        subHeading = (TextView) findViewById(R.id.textView3);
         splay = (Button) findViewById(R.id.button);
         mplay = (Button) findViewById(R.id.button2);
         settings = (Button) findViewById(R.id.button3);
-        Typeface type=Typeface.createFromAsset(getAssets(), "round.ttf");
+        type = Typeface.createFromAsset(getAssets(), "round.ttf");
         heading.setTypeface(type);
         subHeading.setTypeface(type);
     }
@@ -74,17 +67,6 @@ public class MainActivity extends Activity {
 
     public void info(View v) {
 
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        baseContext.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        );
-        return super.onTouchEvent(event);
     }
 
     public void share(View view) {

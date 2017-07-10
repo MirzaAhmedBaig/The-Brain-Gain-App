@@ -2,6 +2,7 @@ package com.mirza.mab.thebrainganinapp;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -30,6 +31,12 @@ public class MyDialogue extends Dialog implements android.view.View.OnClickListe
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
         restart.setOnClickListener(this);
+        this.setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Level_1.paused=false;
+            }
+        });
 
     }
 
@@ -41,6 +48,7 @@ public class MyDialogue extends Dialog implements android.view.View.OnClickListe
                 break;
             case R.id.btn_no:
                 dismiss();
+                Level_1.paused=false;
                 break;
             case R.id.btn_restart:
                 c.recreate();
@@ -49,5 +57,6 @@ public class MyDialogue extends Dialog implements android.view.View.OnClickListe
                 break;
         }
         dismiss();
+        Level_1.paused=false;
     }
 }

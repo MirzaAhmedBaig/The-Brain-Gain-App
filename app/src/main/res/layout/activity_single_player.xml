@@ -18,7 +18,7 @@
         android:layout_marginTop="37dp"
         android:text="LEVEL 1"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <TextView
@@ -30,10 +30,26 @@
         android:layout_below="@+id/textView2"
         android:layout_marginLeft="25dp"
         android:layout_marginStart="25dp"
-        android:text="Stars: 0"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"
+        android:paddingTop="3dp"
+        android:text="0"
+        android:layout_marginRight="20dp"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/filled_star"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp" />
+
 
     <com.mirza.mab.thebrainganinapp.PagerContainer
         android:id="@+id/pager_container"
@@ -72,7 +88,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:background="@drawable/mybutton"
+        android:fontFamily="assets/round.ttf"
         android:onClick="play"
+        android:textSize="20dp"
         android:text="Start" />
 
     <ImageButton
@@ -87,5 +105,6 @@
         android:background="@drawable/mybutton"
         android:onClick="next"
         android:src="@drawable/next" />
+
 
 </RelativeLayout>

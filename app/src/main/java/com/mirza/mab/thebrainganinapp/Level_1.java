@@ -3,6 +3,7 @@ package com.mirza.mab.thebrainganinapp;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
@@ -16,6 +17,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -33,7 +36,7 @@ public class Level_1 extends AppCompatActivity {
     private MyDialogue dialogue;
     private ProgressBar progressBar;
     private View descriptPan, gamePan, errorPan, retryPan, resultPan;
-    private TextView heading, subHeading, msg, roundMsg, roundMsg1, resultMsg;
+    private TextView heading, subHeading, msg, roundMsg, roundMsg1, resultMsg, r1, r2,r3,r4,r5;
     private RatingBar ratingBar;
     private int oncePosition = 0, roundNo = 1;
     private int progressStatus = 0;
@@ -43,14 +46,16 @@ public class Level_1 extends AppCompatActivity {
     int score = 0;
     private static int totalRounds = 4;
     DatabaseHandler dbHandler = SinglePlayer.dbHandler;
-    private Object mPauseLock;
-    private boolean mPaused;
-    private boolean mFinished;
+    public static boolean paused;
+    Typeface type = MainActivity.type;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_level_1);
         nViewInitialized();
 
@@ -69,67 +74,35 @@ public class Level_1 extends AppCompatActivity {
         subHeading = (TextView) findViewById(R.id.textView6);
         msg = (TextView) findViewById(R.id.textView7);
         roundMsg = (TextView) findViewById(R.id.textView8);
+        r3 = (TextView) findViewById(R.id.textView9);
+        r4 = (TextView) findViewById(R.id.textView10);
         roundMsg1 = (TextView) findViewById(R.id.textView13);
+        r1 = (TextView) findViewById(R.id.textView14);
+        r2 = (TextView) findViewById(R.id.textView15);
         resultMsg = (TextView) findViewById(R.id.textView16);
         ratingBar = (RatingBar) findViewById(R.id.congoRatingBar);
-        mPauseLock = new Object();
-        mPaused = false;
-        mFinished = false;
+        paused = false;
         handler = new Handler();
+        heading.setTypeface(type);
+        subHeading.setTypeface(type);
+        r1.setTypeface(type);
+        r2.setTypeface(type);
+        r3.setTypeface(type);
+        r4.setTypeface(type);
+        resultMsg.setTypeface(type);
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        baseContext.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        );
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        baseContext.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        );
-        return super.onTouchEvent(event);
     }
 
     @Override
     public void onBackPressed() {
         if (playing) {
-            onPause();
+            paused = true;
             dialogue = new MyDialogue(Level_1.this);
             dialogue.show();
         } else {
             super.onBackPressed();
         }
     }
-
-//    @SuppressLint("MissingSuperCall")
-//    public void onPause() {
-//        synchronized (mPauseLock) {
-//            mPaused = true;
-//        }
-//    }
-//
-//    /**
-//     * Call this on resume.
-//     */
-//    @SuppressLint("MissingSuperCall")
-//    public void onResume() {
-//        synchronized (mPauseLock) {
-//            mPaused = false;
-//            mPauseLock.notifyAll();
-//        }
-//    }
 
     public void rounds(View v) {
         double pos = Math.random() * 83;
@@ -148,37 +121,31 @@ public class Level_1 extends AppCompatActivity {
                     @Override
                     public void run() {
                         while (progressStatus < 100) {
-                            if (stop) {
-                                return;
-                            }
-                            progressStatus += 1;
-                            try {
-                                Thread.sleep(300);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            if (!paused) {
+                                if (stop) {
+                                    return;
+                                }
+                                progressStatus += 1;
+                                try {
+                                    Thread.sleep(300);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
 
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setProgress(progressStatus);
-                                    if (progressStatus == 100) {
-                                        if (!lost) {
-                                            onError(1);
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setProgress(progressStatus);
+                                        if (progressStatus == 100) {
+                                            if (!lost) {
+                                                onError(1);
+                                            }
+                                            stop = true;
                                         }
-                                        stop = true;
                                     }
-                                }
-                            });
-
-                            synchronized (mPauseLock) {
-                                while (mPaused) {
-                                    try {
-                                        mPauseLock.wait();
-                                    } catch (InterruptedException e) {
-                                    }
-                                }
+                                });
                             }
+
                         }
                     }
                 });
@@ -195,28 +162,30 @@ public class Level_1 extends AppCompatActivity {
                     @Override
                     public void run() {
                         while (progressStatus < 100) {
-                            if (stop) {
-                                return;
-                            }
-                            progressStatus += 1;
-                            try {
-                                Thread.sleep(250);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setProgress(progressStatus);
-                                    if (progressStatus == 100) {
-                                        if (!lost) {
-                                            onError(2);
-                                        }
-                                        stop = true;
-                                    }
+                            if (!paused) {
+                                if (stop) {
+                                    return;
                                 }
-                            });
+                                progressStatus += 1;
+                                try {
+                                    Thread.sleep(250);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setProgress(progressStatus);
+                                        if (progressStatus == 100) {
+                                            if (!lost) {
+                                                onError(2);
+                                            }
+                                            stop = true;
+                                        }
+                                    }
+                                });
+                            }
                         }
                     }
                 });
@@ -232,28 +201,30 @@ public class Level_1 extends AppCompatActivity {
                     @Override
                     public void run() {
                         while (progressStatus < 100) {
-                            if (stop) {
-                                return;
-                            }
-                            progressStatus += 1;
-                            try {
-                                Thread.sleep(200);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setProgress(progressStatus);
-                                    if (progressStatus == 100) {
-                                        if (!lost) {
-                                            onError(3);
-                                        }
-                                        stop = true;
-                                    }
+                            if (!paused) {
+                                if (stop) {
+                                    return;
                                 }
-                            });
+                                progressStatus += 1;
+                                try {
+                                    Thread.sleep(200);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setProgress(progressStatus);
+                                        if (progressStatus == 100) {
+                                            if (!lost) {
+                                                onError(3);
+                                            }
+                                            stop = true;
+                                        }
+                                    }
+                                });
+                            }
                         }
                     }
                 });
@@ -269,28 +240,30 @@ public class Level_1 extends AppCompatActivity {
                     @Override
                     public void run() {
                         while (progressStatus < 100) {
-                            if (stop) {
-                                return;
-                            }
-                            progressStatus += 1;
-                            try {
-                                Thread.sleep(150);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressBar.setProgress(progressStatus);
-                                    if (progressStatus == 100) {
-                                        if (!lost) {
-                                            onError(4);
-                                        }
-                                        stop = true;
-                                    }
+                            if (!paused) {
+                                if (stop) {
+                                    return;
                                 }
-                            });
+                                progressStatus += 1;
+                                try {
+                                    Thread.sleep(150);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setProgress(progressStatus);
+                                        if (progressStatus == 100) {
+                                            if (!lost) {
+                                                onError(4);
+                                            }
+                                            stop = true;
+                                        }
+                                    }
+                                });
+                            }
                         }
                     }
                 });
@@ -320,6 +293,12 @@ public class Level_1 extends AppCompatActivity {
 
     public void restartGame(View v) {
         this.recreate();
+    }
+
+    public void nextLevel(View v){
+        this.finish();
+        Intent intent=new Intent(getBaseContext(),Level_2.class);
+        startActivity(intent);
     }
 
     public class ButtonAdapter extends BaseAdapter {
