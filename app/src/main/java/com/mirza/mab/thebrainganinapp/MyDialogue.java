@@ -34,7 +34,7 @@ public class MyDialogue extends Dialog implements android.view.View.OnClickListe
         this.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                Level_1.paused=false;
+                Flags.paused=false;
             }
         });
 
@@ -48,7 +48,7 @@ public class MyDialogue extends Dialog implements android.view.View.OnClickListe
                 break;
             case R.id.btn_no:
                 dismiss();
-                Level_1.paused=false;
+                Flags.paused=false;
                 break;
             case R.id.btn_restart:
                 c.recreate();
@@ -57,6 +57,6 @@ public class MyDialogue extends Dialog implements android.view.View.OnClickListe
                 break;
         }
         dismiss();
-        Level_1.paused=false;
+        Flags.paused=false;
     }
 }

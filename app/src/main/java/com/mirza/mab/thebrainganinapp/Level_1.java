@@ -1,8 +1,11 @@
 package com.mirza.mab.thebrainganinapp;
 
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -36,7 +39,7 @@ public class Level_1 extends AppCompatActivity {
     private MyDialogue dialogue;
     private ProgressBar progressBar;
     private View descriptPan, gamePan, errorPan, retryPan, resultPan;
-    private TextView heading, subHeading, msg, roundMsg, roundMsg1, resultMsg, r1, r2,r3,r4,r5;
+    private TextView heading, subHeading, msg, roundMsg, roundMsg1, resultMsg, r1, r2, r3, r4;
     private RatingBar ratingBar;
     private int oncePosition = 0, roundNo = 1;
     private int progressStatus = 0;
@@ -46,8 +49,8 @@ public class Level_1 extends AppCompatActivity {
     int score = 0;
     private static int totalRounds = 4;
     DatabaseHandler dbHandler = SinglePlayer.dbHandler;
-    public static boolean paused;
     Typeface type = MainActivity.type;
+    boolean correct = false;
 
 
     @Override
@@ -81,7 +84,7 @@ public class Level_1 extends AppCompatActivity {
         r2 = (TextView) findViewById(R.id.textView15);
         resultMsg = (TextView) findViewById(R.id.textView16);
         ratingBar = (RatingBar) findViewById(R.id.congoRatingBar);
-        paused = false;
+        Flags.paused = false;
         handler = new Handler();
         heading.setTypeface(type);
         subHeading.setTypeface(type);
@@ -96,10 +99,17 @@ public class Level_1 extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (playing) {
-            paused = true;
+            Flags.paused = true;
             dialogue = new MyDialogue(Level_1.this);
+            dialogue.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    Flags.paused = false;
+                }
+            });
             dialogue.show();
         } else {
+            Flags.refreshFlag=true;
             super.onBackPressed();
         }
     }
@@ -121,7 +131,7 @@ public class Level_1 extends AppCompatActivity {
                     @Override
                     public void run() {
                         while (progressStatus < 100) {
-                            if (!paused) {
+                            if (!Flags.paused) {
                                 if (stop) {
                                     return;
                                 }
@@ -150,7 +160,6 @@ public class Level_1 extends AppCompatActivity {
                     }
                 });
                 progressThread.start();
-
                 break;
             case 2:
                 descriptPan.setVisibility(View.GONE);
@@ -162,7 +171,7 @@ public class Level_1 extends AppCompatActivity {
                     @Override
                     public void run() {
                         while (progressStatus < 100) {
-                            if (!paused) {
+                            if (!Flags.paused) {
                                 if (stop) {
                                     return;
                                 }
@@ -201,7 +210,7 @@ public class Level_1 extends AppCompatActivity {
                     @Override
                     public void run() {
                         while (progressStatus < 100) {
-                            if (!paused) {
+                            if (!Flags.paused) {
                                 if (stop) {
                                     return;
                                 }
@@ -240,7 +249,7 @@ public class Level_1 extends AppCompatActivity {
                     @Override
                     public void run() {
                         while (progressStatus < 100) {
-                            if (!paused) {
+                            if (!Flags.paused) {
                                 if (stop) {
                                     return;
                                 }
@@ -295,9 +304,9 @@ public class Level_1 extends AppCompatActivity {
         this.recreate();
     }
 
-    public void nextLevel(View v){
+    public void nextLevel(View v) {
         this.finish();
-        Intent intent=new Intent(getBaseContext(),Level_2.class);
+        Intent intent = new Intent(getBaseContext(), Level_2.class);
         startActivity(intent);
     }
 
@@ -326,114 +335,129 @@ public class Level_1 extends AppCompatActivity {
         public View getView(final int position, View convertView, final ViewGroup parent) {
 
             final Button button;
+            final Button correctButton;
             if (convertView == null) {
                 button = new Button(mContext);
+                correctButton = new Button(mContext);
                 button.setLayoutParams(new GridView.LayoutParams(85, 85));
+                correctButton.setLayoutParams(new GridView.LayoutParams(85, 85));
             } else {
                 button = (Button) convertView;
+                correctButton = (Button) convertView;
             }
 
             if (position == oncePosition) {
-                button.setText(randomValue);
+                correct = true;
+                correctButton.setTextColor(Color.rgb(80, 80, 80));
+                correctButton.setText(randomValue);
             } else {
+                button.setTextColor(Color.rgb(80, 80, 80));
                 button.setText(value);
             }
-            button.setTextColor(Color.rgb(80, 80, 80));
+
             button.setTextSize(16);
+            correctButton.setTextSize(16);
             int resID = getResources().getIdentifier("button", "drawable", "com.mirza.mab.thebrainganinapp");
             button.setBackgroundResource(resID);
+            correctButton.setBackgroundResource(resID);
+
             button.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+
+                    Button btn = (Button) parent.getChildAt(oncePosition);
+                    ObjectAnimator colorAnim = ObjectAnimator.ofInt(btn, "textColor", Color.rgb(76, 175, 80), Color.TRANSPARENT);
+                    colorAnim.setDuration(1000);
+                    colorAnim.setEvaluator(new ArgbEvaluator());
+                    colorAnim.setRepeatCount(ValueAnimator.INFINITE);
+                    colorAnim.setRepeatMode(ValueAnimator.REVERSE);
+                    colorAnim.start();
+                    onError(roundNo);
+                }
+            });
+
+            correctButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     switch (roundNo) {
                         case 1:
-                            if (button.getText().toString().equals("1")) {
-                                score = score + progressBar.getProgress();
-                                stop = true;
-                                heading.setText("CONGRATS !");
-                                subHeading.setText("Now find and tap number 3");
-                                roundMsg.setText("Round 2 of 4");
-                                gamePan.setVisibility(View.GONE);
-                                descriptPan.setVisibility(View.VISIBLE);
-                                roundNo = 2;
-                            } else {
-                                onError(1);
-                            }
+                            score = score + progressBar.getProgress();
+                            stop = true;
+                            heading.setText("CONGRATS !");
+                            subHeading.setText("Now find and tap number 3");
+                            roundMsg.setText("Round 2 of 4");
+                            gamePan.setVisibility(View.GONE);
+                            descriptPan.setVisibility(View.VISIBLE);
+                            roundNo = 2;
                             break;
                         case 2:
-                            if (button.getText().toString().equals("3")) {
-                                score = score + progressBar.getProgress();
-                                stop = true;
-                                heading.setText("CONGRATS !");
-                                subHeading.setText("Now find and tap number O");
-                                roundMsg.setText("Round 3 of 4");
-                                gamePan.setVisibility(View.GONE);
-                                descriptPan.setVisibility(View.VISIBLE);
-                                roundNo = 3;
-                            } else {
-                                onError(2);
-                            }
+                            score = score + progressBar.getProgress();
+                            stop = true;
+                            heading.setText("CONGRATS !");
+                            subHeading.setText("Now find and tap number O");
+                            roundMsg.setText("Round 3 of 4");
+                            gamePan.setVisibility(View.GONE);
+                            descriptPan.setVisibility(View.VISIBLE);
+                            roundNo = 3;
                             break;
                         case 3:
-                            if (button.getText().toString().equals("O")) {
-                                score = score + progressBar.getProgress();
-                                stop = true;
-                                heading.setText("CONGRATS !");
-                                subHeading.setText("Now find and tap number 8");
-                                roundMsg.setText("Round 3 of 4");
-                                gamePan.setVisibility(View.GONE);
-                                descriptPan.setVisibility(View.VISIBLE);
-                                roundNo = 4;
-                            } else {
-                                onError(3);
-                            }
+                            score = score + progressBar.getProgress();
+                            stop = true;
+                            heading.setText("CONGRATS !");
+                            subHeading.setText("Now find and tap number 8");
+                            roundMsg.setText("Round 3 of 4");
+                            gamePan.setVisibility(View.GONE);
+                            descriptPan.setVisibility(View.VISIBLE);
+                            roundNo = 4;
+
                             break;
                         case 4:
-                            if (button.getText().toString().equals("8")) {
-                                score = score + progressBar.getProgress();
-                                stop = true;
-                                score = score / totalRounds;
-                                score++;
-                                if (score <= 1 && score <= 20) {
-                                    score = 5;
-                                    resultMsg.setText("You have good eye!");
-                                } else if (score <= 21 && score <= 40) {
-                                    resultMsg.setText("Be faster for more stars!");
-                                    score = 4;
-                                } else if (score <= 41 && score <= 60) {
-                                    score = 3;
-                                    resultMsg.setText("Be faster for more stars!");
-                                } else if (score <= 61 && score <= 80) {
-                                    score = 2;
-                                    resultMsg.setText("Be faster for more stars!");
-                                } else if (score <= 81 && score <= 99) {
-                                    score = 1;
-                                    resultMsg.setText("Be faster for more stars!");
-                                }
-
-                                if (dbHandler.getScore(1) == 0) {
-                                    dbHandler.updateScore(1, score);
-                                }
-                                if (dbHandler.getScore(1) < score) {
-                                    dbHandler.updateScore(1, score);
-                                }
-                                dbHandler.addLevel(2, 0);
-                                gamePan.setVisibility(View.GONE);
-//                                ratingBar.setRating(score);
-                                ObjectAnimator anim = ObjectAnimator.ofFloat(ratingBar, "rating", 0, score);
-                                anim.setDuration(4000);
-                                anim.start();
-                                resultPan.setVisibility(View.VISIBLE);
-                                roundNo = 4;
-                                playing = false;
-                            } else {
-                                onError(4);
+                            score = score + progressBar.getProgress();
+                            stop = true;
+                            score = score / totalRounds;
+                            score++;
+                            if (score <= 1 && score <= 30) {
+                                score = 5;
+                                resultMsg.setText("You have good eye!");
+                            } else if (score <= 31 && score <= 50) {
+                                resultMsg.setText("Be faster for more stars!");
+                                score = 4;
+                            } else if (score <= 51 && score <= 70) {
+                                score = 3;
+                                resultMsg.setText("Be faster for more stars!");
+                            } else if (score <= 71 && score <= 90) {
+                                score = 2;
+                                resultMsg.setText("Be faster for more stars!");
+                            } else if (score <= 91 && score <= 99) {
+                                score = 1;
+                                resultMsg.setText("Be faster for more stars!");
                             }
+
+                            if (dbHandler.getScore(1) == 0) {
+                                dbHandler.updateScore(1, score);
+                            }
+                            if (dbHandler.getScore(1) < score) {
+                                dbHandler.updateScore(1, score);
+                            }
+                            dbHandler.addLevel(2, 0);
+                            gamePan.setVisibility(View.GONE);
+                            ObjectAnimator anim = ObjectAnimator.ofFloat(ratingBar, "rating", 0, score);
+                            anim.setDuration(4000);
+                            anim.start();
+                            resultPan.setVisibility(View.VISIBLE);
+                            roundNo = 4;
+                            playing = false;
                             break;
                     }
                 }
             });
+            if (correct) {
+                correct = false;
+                return correctButton;
+            }
             return button;
         }
 

@@ -26,13 +26,14 @@ public class SinglePlayer extends AppCompatActivity {
     private View baseContext;
     PagerContainer mContainer;
     ViewPager pager;
-    TextView level,stars;
+    TextView level, stars;
     int levelNo = 1;
     public static DatabaseHandler dbHandler;
-    int maxLevel=1;
-    int lock=1;
+    int maxLevel = 1;
+    int lock = 1;
     MessagePane pane;
-    Typeface type=MainActivity.type;
+    Typeface type;
+    PagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +45,14 @@ public class SinglePlayer extends AppCompatActivity {
 
         baseContext = findViewById(R.id.baseContext);
         level = (TextView) findViewById(R.id.textView2);
-        stars=(TextView)findViewById(R.id.textView4);
+        stars = (TextView) findViewById(R.id.textView4);
         mContainer = (PagerContainer) findViewById(R.id.pager_container);
 
         pager = mContainer.getViewPager();
         pager.setPageTransformer(true, new ZoomOutPageTransformer());
+        addViews();
 
-        PagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        pager.setAdapter(adapter);
-        pager.setOffscreenPageLimit(adapter.getCount());
+        type = Typeface.createFromAsset(getAssets(), "round.ttf");
 
         pager.setClipChildren(true);
         pager.setClipToPadding(false);
@@ -74,11 +74,28 @@ public class SinglePlayer extends AppCompatActivity {
             }
         });
 
-        dbHandler=new DatabaseHandler(this);
-        dbHandler.addLevel(1,0);
-        maxLevel=dbHandler.getMaxLevel();
-        stars.setText(""+dbHandler.getScore(1));
-        pager.setCurrentItem(maxLevel-1);
+        dbHandler = new DatabaseHandler(this);
+        dbHandler.addLevel(1, 0);
+        maxLevel = dbHandler.getMaxLevel();
+        stars.setText("" + dbHandler.getTotalScore());
+        pager.setCurrentItem(maxLevel - 1);
+    }
+
+    @Override
+    protected void onResume() {
+        if (Flags.refreshFlag) {
+            Flags.refreshFlag = false;
+            Intent intent = new Intent(this, SinglePlayer.class);
+            this.finish();
+            startActivity(intent);
+        }
+        super.onResume();
+    }
+
+    public void addViews() {
+        adapter = new MyPagerAdapter(getSupportFragmentManager());
+        pager.setAdapter(adapter);
+        pager.setOffscreenPageLimit(adapter.getCount());
 
     }
 
@@ -126,58 +143,58 @@ public class SinglePlayer extends AppCompatActivity {
         }
 
         public Fragment getItem(int pos) {
-            float stars=dbHandler.getScore(pos+1);
+            float stars = dbHandler.getScore(pos + 1);
             switch (pos) {
                 case 0:
-                    if((pos+1)<=maxLevel){
-                        lock=0;
-                    }else {
-                        lock=1;
+                    if ((pos + 1) <= maxLevel) {
+                        lock = 0;
+                    } else {
+                        lock = 1;
                     }
-                    return Levels.newInstance("l1", 1,lock,stars);
+                    return Levels.newInstance("l1", 1, lock, stars);
                 case 1:
-                    if((pos+1)<=maxLevel){
-                        lock=0;
-                    }else {
-                        lock=1;
+                    if ((pos + 1) <= maxLevel) {
+                        lock = 0;
+                    } else {
+                        lock = 1;
                     }
-                    return Levels.newInstance("flas2", 2,lock,stars);
+                    return Levels.newInstance("l2", 2, lock, stars);
                 case 2:
-                    if((pos+1)<=maxLevel){
-                        lock=0;
-                    }else {
-                        lock=1;
+                    if ((pos + 1) <= maxLevel) {
+                        lock = 0;
+                    } else {
+                        lock = 1;
                     }
-                    return Levels.newInstance("flash1", 3,lock,stars);
+                    return Levels.newInstance("flash1", 3, lock, stars);
                 case 3:
-                    if((pos+1)<=maxLevel){
-                        lock=0;
-                    }else {
-                        lock=1;
+                    if ((pos + 1) <= maxLevel) {
+                        lock = 0;
+                    } else {
+                        lock = 1;
                     }
-                    return Levels.newInstance("flas2", 4,lock,stars);
+                    return Levels.newInstance("flas2", 4, lock, stars);
                 case 4:
-                    if((pos+1)<=maxLevel){
-                        lock=0;
-                    }else {
-                        lock=1;
+                    if ((pos + 1) <= maxLevel) {
+                        lock = 0;
+                    } else {
+                        lock = 1;
                     }
-                    return Levels.newInstance("flash1", 5,lock,stars);
+                    return Levels.newInstance("flash1", 5, lock, stars);
                 default:
-                    if((pos+1)<=maxLevel){
-                        lock=0;
-                    }else {
-                        lock=1;
+                    if ((pos + 1) <= maxLevel) {
+                        lock = 0;
+                    } else {
+                        lock = 1;
                     }
-                    return Levels.newInstance("flas2", 6,lock,stars);
+                    return Levels.newInstance("flas2", 6, lock, stars);
             }
         }
 
 
     }
 
-    public void levelLockedMsg(View v){
-        pane = new MessagePane(SinglePlayer.this,"Level Locked!","You don't have enough stars to play this level");
+    public void levelLockedMsg(View v) {
+        pane = new MessagePane(SinglePlayer.this, "Level Locked!", "You don't have enough stars to play this level");
         pane.show();
     }
 

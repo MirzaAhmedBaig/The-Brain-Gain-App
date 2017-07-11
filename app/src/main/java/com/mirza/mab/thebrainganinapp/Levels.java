@@ -1,27 +1,20 @@
 package com.mirza.mab.thebrainganinapp;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Dimension;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Levels extends Fragment implements View.OnClickListener {
 
     private View baseContext, lockedLevels;
     private RatingBar ratingBar;
-    private MessagePane pane;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -31,10 +24,6 @@ public class Levels extends Fragment implements View.OnClickListener {
         baseContext = v.findViewById(R.id.baseContext);
         lockedLevels=v.findViewById(R.id.lockedLevels);
         ratingBar = (RatingBar) v.findViewById(R.id.ratingBar);
-//        ratingBar=(RatingBar)v.findViewById(R.id.ratingBar);
-//        ratingBar.setStarsSeparation(100, Dimension.PX);
-//        ratingBar.animate();
-//        ratingBar.setCameraDistance(2);
 
         baseContext.setOnClickListener(this);
         int resID = getResources().getIdentifier(getArguments().getString("back"), "drawable", "com.mirza.mab.thebrainganinapp");
@@ -84,4 +73,5 @@ public class Levels extends Fragment implements View.OnClickListener {
 
         }
     }
+
 }

@@ -30,7 +30,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_SCORE + "("
-                + LEVEL_NO + " INTEGER PRIMARY KEY," + LEVEL_STARS +")";
+                + LEVEL_NO + " INTEGER PRIMARY KEY," + LEVEL_STARS + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -83,6 +83,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         return stars;
+    }
+
+    public int getTotalScore() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        final SQLiteStatement stmt = db
+                .compileStatement("SELECT SUM(" + LEVEL_STARS + ") FROM " + TABLE_SCORE);
+        return Integer.parseInt(stmt.simpleQueryForString());
+
     }
 
     public void updateScore(int level, int score) {

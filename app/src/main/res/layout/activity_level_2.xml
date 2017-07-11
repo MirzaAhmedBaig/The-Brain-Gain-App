@@ -1,9 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/baseContext"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/basic"
     tools:context="com.mirza.mab.thebrainganinapp.Level_2">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/levelMsgFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="rounds"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="97dp"
+            android:text="LEVEL 2"
+            android:textAlignment="center"
+            android:textColor="@color/lightText"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/subHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/head"
+            android:layout_marginTop="162dp"
+            android:text="Tap the numbers in ascending order from 1 to 24"
+            android:textAlignment="center"
+            android:textColor="@color/lightText"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tapmsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="72dp"
+            android:text="Tap to continue"
+            android:textAlignment="center"
+            android:textColor="@color/lightText"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/roundmsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/tapmsg"
+            android:layout_marginTop="26dp"
+            android:text="Round 1 of 2"
+            android:textAlignment="center"
+            android:textColor="#999999"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/gridFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:progress="0"
+            android:scaleY="1.75"
+            android:theme="@style/AppTheme.WhiteAccent" />
+
+        <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/buttonGrid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/progressBar"
+            android:columnWidth="150dp"
+            android:gravity="center"
+            android:horizontalSpacing="10dp"
+            android:numColumns="4"
+            android:padding="10dp"
+            android:layout_marginTop="5dp"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="10dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/errorPan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="lostRound"
+        android:visibility="gone">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="189dp"
+            app:srcCompat="@drawable/error" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="39dp"
+            android:fontFamily="assets/round.ttf"
+            android:text="Tap to continue"
+            android:textColor="@color/lightText"
+            android:textSize="25dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/retryPan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/retHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="84dp"
+            android:fontFamily="assets/round.ttf"
+            android:text="Oops...! Try again!"
+            android:textAlignment="center"
+            android:textColor="@color/lightText"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/retsubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/retHead"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="101dp"
+            android:fontFamily="assets/round.ttf"
+            android:text="You tapped the wrong number"
+            android:textAlignment="center"
+            android:textColor="@color/lightText"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/retMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/retsubHead"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="119dp"
+            android:fontFamily="assets/round.ttf"
+            android:text="Come on! You can don it!"
+            android:textAlignment="center"
+            android:textColor="@color/lightText"
+            android:textSize="25sp" />
+
+        <ImageButton
+            android:id="@+id/button5"
+            android:layout_width="60dip"
+            android:layout_height="50dip"
+            android:layout_alignLeft="@+id/retHead"
+            android:layout_alignStart="@+id/retHead"
+            android:layout_below="@+id/retMsg"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/mybutton"
+            android:onClick="restartGame"
+            android:src="@drawable/replay" />
+
+        <ImageButton
+            android:id="@+id/button7"
+            android:layout_width="60dip"
+            android:layout_height="50dip"
+            android:layout_alignBottom="@+id/button5"
+            android:layout_alignEnd="@+id/retHead"
+            android:layout_alignRight="@+id/retHead"
+            android:background="@drawable/mybutton"
+            android:onClick="mainMenu"
+            android:src="@drawable/pre" />
+
+        <TextView
+            android:id="@+id/retRoundMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button7"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:textAlignment="center"
+            android:textColor="#999999"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/resultPan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/resHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="31dp"
+            android:fontFamily="assets/round.ttf"
+            android:text="LEVEL 2"
+            android:textAlignment="center"
+            android:textColor="@color/lightText"
+            android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/ressubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/resHead"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="38dp"
+            android:gravity="center"
+            android:text="CONGRATS!"
+            android:textAlignment="center"
+            android:textColor="@color/lightText"
+            android:textSize="35dp" />
+
+        <RatingBar
+            android:id="@+id/congoRatingBar"
+            style="@style/CongoRatingBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ressubHead"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:clickable="false"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="1" />
+
+        <TextView
+            android:id="@+id/resMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/congoRatingBar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="86dp"
+            android:text="Be faster for more stars!"
+            android:textColor="@color/lightText"
+            android:textSize="25sp" />
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/button8"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="33dp"
+            android:layout_toLeftOf="@+id/resHead"
+            android:layout_toStartOf="@+id/resHead"
+            android:onClick="restartGame"
+            android:src="@drawable/replay"
+            app:cb_pressedRingWidth="8dip" />
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/button9"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_alignTop="@+id/button8"
+            android:layout_toEndOf="@+id/resHead"
+            android:layout_toRightOf="@+id/resHead"
+            android:onClick="nextLevel"
+            android:src="@drawable/next"
+            app:cb_pressedRingWidth="8dip" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
