@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
     public void share(View view) {
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
         intent.setType("text/plain");
-        String shareBodyText = "I love The Brain Gain App...! \n This is the best game i ever played.\nhttp://mirzaahmed.tk/bgapp.apk";
+        String shareBodyText = "I love The Brain Gain App...! \n This is the best game i ever played.\nhttp://insecgps.tk/bgapp.apk";
         intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "The Brain Gain App");
         intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
         startActivity(Intent.createChooser(intent, "Choose sharing method"));
