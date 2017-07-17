@@ -32,7 +32,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Level_3 extends AppCompatActivity {
+public class Level_4 extends AppCompatActivity {
 
     private View baseContext,
             levelMsgFrame,
@@ -53,15 +53,16 @@ public class Level_3 extends AppCompatActivity {
     private RatingBar ratingBar;
 
     private static final int count = 24;
-    private static final int levelNo = 3;
+    private static final int levelNo = 4;
     private final int totalRounds = 2;
     private int roundNo = 1;
 
     private int[] numbers = new int[count];
-    private int nextPosition = 1;
+    private int nextPosition;
     private int resultCount;
     private int progressStatus = 0;
     private int score = 0;
+    private int randomStart;
 
     private boolean stop = false, playing = false, lost = false;
 
@@ -70,6 +71,7 @@ public class Level_3 extends AppCompatActivity {
     private Thread progressThread;
     private DatabaseHandler dbHandler = SinglePlayer.dbHandler;
     private Typeface type;
+    double pos = Math.random()*6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class Level_3 extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_level_3);
+        setContentView(R.layout.activity_level_4);
         nViewInitialized();
 
     }
@@ -124,13 +126,19 @@ public class Level_3 extends AppCompatActivity {
 
         progressBar.setMax(1000);
 
+        randomStart=(int)pos;
+        if(randomStart<2){
+            randomStart=2;
+        }
+        subHead.setText("Now Tap the numbers in ascending order counting by multiple of number , starting from "+randomStart+" to "+(randomStart*24));
+
     }
 
     @Override
     public void onBackPressed() {
         if (playing) {
             Flags.paused = true;
-            dialogue = new MyDialogue(Level_3.this);
+            dialogue = new MyDialogue(Level_4.this);
             dialogue.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
@@ -151,8 +159,9 @@ public class Level_3 extends AppCompatActivity {
         switch (roundNo) {
 
             case 1:
-                numbers = initArray(numbers, count, 1);
+                numbers = initArray(numbers, count, randomStart);
                 numbers = doRandom(numbers, count);
+                nextPosition=randomStart;
                 resultCount = 0;
                 levelMsgFrame.setVisibility(View.GONE);
                 gridview.setAdapter(new ButtonAdapter(this));
@@ -170,7 +179,7 @@ public class Level_3 extends AppCompatActivity {
                                 }
                                 progressStatus += 1;
                                 try {
-                                    Thread.sleep(40);
+                                    Thread.sleep(45);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -195,7 +204,7 @@ public class Level_3 extends AppCompatActivity {
                 progressThread.start();
                 break;
             case 2:
-                numbers = initArray(numbers, count, 1);
+                numbers = initArray(numbers, count, randomStart);
                 numbers = doRandom(numbers, count);
                 levelMsgFrame.setVisibility(View.GONE);
                 resultCount = 0;
@@ -214,7 +223,7 @@ public class Level_3 extends AppCompatActivity {
                                 }
                                 progressStatus += 1;
                                 try {
-                                    Thread.sleep(45);
+                                    Thread.sleep(50);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -265,14 +274,13 @@ public class Level_3 extends AppCompatActivity {
 
     public void nextLevel(View v) {
         this.finish();
-        Intent intent = new Intent(getBaseContext(), Level_3.class);
+        Intent intent = new Intent(getBaseContext(), Level_4.class);
         startActivity(intent);
     }
 
     public int[] initArray(int[] arr, int size, int start) {
         for (int i = 0; i < size; i++) {
-            arr[i] = start;
-            start=start+2;
+            arr[i] = (i+1)*start;
         }
         return arr;
 
@@ -335,7 +343,7 @@ public class Level_3 extends AppCompatActivity {
                     switch (roundNo) {
                         case 1:
                             if (numClicked == nextPosition) {
-                                nextPosition=nextPosition+2;
+                                nextPosition=nextPosition+randomStart;
                                 resultCount++;
                                 button.setText("");
                                 if (resultCount == count) {
@@ -343,11 +351,11 @@ public class Level_3 extends AppCompatActivity {
                                     score = score + progressBar.getProgress();
                                     roundNo = 2;
                                     head.setText("CONGRATS !");
-                                    subHead.setText("Now Tap the numbers in descending order counting by twos, starting from 47 to 1");
+                                    subHead.setText("Now Tap the numbers in descending order counting by multiple of number , starting from "+(randomStart*24)+" to "+randomStart);
                                     roundMsg.setText("Round 2 of " + totalRounds);
                                     gridFrame.setVisibility(View.GONE);
                                     levelMsgFrame.setVisibility(View.VISIBLE);
-                                    nextPosition=nextPosition-2;
+                                    nextPosition=nextPosition-randomStart;
                                 }
 
                             } else {
@@ -375,7 +383,7 @@ public class Level_3 extends AppCompatActivity {
                             break;
                         case 2:
                             if (numClicked == nextPosition) {
-                                nextPosition=nextPosition-2;
+                                nextPosition=nextPosition-randomStart;
                                 resultCount++;
                                 button.setText("");
                                 if (resultCount == count) {

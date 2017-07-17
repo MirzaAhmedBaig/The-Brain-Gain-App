@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
-        android:background="@color/success"
+        android:background="@color/warn"
         android:fontFamily="assets/round.ttf"
         android:padding="15dp"
         android:text="Game Paused"

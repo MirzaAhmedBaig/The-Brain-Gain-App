@@ -22,6 +22,8 @@ public class MainActivity extends Activity {
     private Button splay, mplay, settings, share, info, like;
     private TextView heading, subHeading;
     public static Typeface type;
+    private Info inf;
+    private DatabaseHandler dbHandler = SinglePlayer.dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class MainActivity extends Activity {
     }
 
     public void info(View v) {
+        inf=new Info(this);
+        inf.show();
 
     }
 

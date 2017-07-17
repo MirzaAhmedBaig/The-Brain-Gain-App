@@ -64,7 +64,8 @@ public class Levels extends Fragment implements View.OnClickListener {
             startActivity(intent);
 
         } else if (getArguments().getInt("level") == 4 && getArguments().getInt("lock") == 0) {
-            Toast.makeText(getContext(), "Level 4", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), Level_4.class);
+            startActivity(intent);
 
         } else if (getArguments().getInt("level") == 5 && getArguments().getInt("lock") == 0) {
             Toast.makeText(getContext(), "Level 5", Toast.LENGTH_SHORT).show();

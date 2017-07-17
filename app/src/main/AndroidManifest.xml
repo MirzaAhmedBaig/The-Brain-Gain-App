@@ -35,6 +35,9 @@
         <activity
             android:name=".Level_3"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".Level_4"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>

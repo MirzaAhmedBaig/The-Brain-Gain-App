@@ -93,6 +93,7 @@ public class Level_1 extends AppCompatActivity {
         r3.setTypeface(type);
         r4.setTypeface(type);
         resultMsg.setTypeface(type);
+        progressBar.setMax(1000);
 
     }
 
@@ -130,14 +131,14 @@ public class Level_1 extends AppCompatActivity {
                 progressThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while (progressStatus < 100) {
+                        while (progressStatus < 1000) {
                             if (!Flags.paused) {
                                 if (stop) {
                                     return;
                                 }
                                 progressStatus += 1;
                                 try {
-                                    Thread.sleep(300);
+                                    Thread.sleep(30);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -146,7 +147,7 @@ public class Level_1 extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         progressBar.setProgress(progressStatus);
-                                        if (progressStatus == 100) {
+                                        if (progressStatus == 1000) {
                                             if (!lost) {
                                                 onError(1);
                                             }
@@ -170,14 +171,14 @@ public class Level_1 extends AppCompatActivity {
                 progressThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while (progressStatus < 100) {
+                        while (progressStatus < 1000) {
                             if (!Flags.paused) {
                                 if (stop) {
                                     return;
                                 }
                                 progressStatus += 1;
                                 try {
-                                    Thread.sleep(250);
+                                    Thread.sleep(25);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -186,7 +187,7 @@ public class Level_1 extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         progressBar.setProgress(progressStatus);
-                                        if (progressStatus == 100) {
+                                        if (progressStatus == 1000) {
                                             if (!lost) {
                                                 onError(2);
                                             }
@@ -209,14 +210,14 @@ public class Level_1 extends AppCompatActivity {
                 progressThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while (progressStatus < 100) {
+                        while (progressStatus < 1000) {
                             if (!Flags.paused) {
                                 if (stop) {
                                     return;
                                 }
                                 progressStatus += 1;
                                 try {
-                                    Thread.sleep(200);
+                                    Thread.sleep(20);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -225,7 +226,7 @@ public class Level_1 extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         progressBar.setProgress(progressStatus);
-                                        if (progressStatus == 100) {
+                                        if (progressStatus == 1000) {
                                             if (!lost) {
                                                 onError(3);
                                             }
@@ -248,14 +249,14 @@ public class Level_1 extends AppCompatActivity {
                 progressThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        while (progressStatus < 100) {
+                        while (progressStatus < 1000) {
                             if (!Flags.paused) {
                                 if (stop) {
                                     return;
                                 }
                                 progressStatus += 1;
                                 try {
-                                    Thread.sleep(150);
+                                    Thread.sleep(15);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -264,7 +265,7 @@ public class Level_1 extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         progressBar.setProgress(progressStatus);
-                                        if (progressStatus == 100) {
+                                        if (progressStatus == 1000) {
                                             if (!lost) {
                                                 onError(4);
                                             }
@@ -419,19 +420,19 @@ public class Level_1 extends AppCompatActivity {
                             stop = true;
                             score = score / totalRounds;
                             score++;
-                            if (score <= 1 && score <= 30) {
+                            if (score <= 1 && score <= 300) {
                                 score = 5;
                                 resultMsg.setText("You have good eye!");
-                            } else if (score <= 31 && score <= 50) {
+                            } else if (score <= 301 && score <= 500) {
                                 resultMsg.setText("Be faster for more stars!");
                                 score = 4;
-                            } else if (score <= 51 && score <= 70) {
+                            } else if (score <= 501 && score <= 700) {
                                 score = 3;
                                 resultMsg.setText("Be faster for more stars!");
-                            } else if (score <= 71 && score <= 90) {
+                            } else if (score <= 701 && score <= 900) {
                                 score = 2;
                                 resultMsg.setText("Be faster for more stars!");
-                            } else if (score <= 91 && score <= 99) {
+                            } else if (score <= 901 && score <= 999) {
                                 score = 1;
                                 resultMsg.setText("Be faster for more stars!");
                             }

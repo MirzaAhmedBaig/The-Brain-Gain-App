@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:paddingBottom="20sp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:background="@color/warn"
+        android:padding="15dp"
+        android:text="BRAIN TWIST"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/title"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:text="Version 1.0.0\nAuthor: Mirza Ahmed Baig\nEmail: mirzaahmed65@gmail.com"
+        android:textAlignment="textStart"
+        android:textColor="@color/lightText"
+        android:textSize="15dp"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/li"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/msg"
+        android:paddingLeft="15dp"
+        android:text="Website: "
+        android:textColor="@color/lightText"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/li"
+        android:layout_toEndOf="@+id/li"
+        android:layout_toRightOf="@+id/li"
+        android:text="*****************"
+        android:textColor="@color/warn"
+        android:textSize="18dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/link">
+
+        <ImageView
+            android:id="@+id/ImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_facebook" />
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/ImageView2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_twitter" />
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="10dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/ImageView3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_instagram" />
+    </LinearLayout>
+
+
+</RelativeLayout>
