@@ -34,7 +34,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="160sp"
+        android:layout_width="190sp"
         android:layout_height="60sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -42,12 +42,14 @@
         android:background="@drawable/mybutton"
         android:onClick="singlePlay"
         android:text="Singleplayer"
+        android:drawableLeft="@drawable/ic_user"
+        android:paddingLeft="10dp"
         android:fontFamily="assets/round.ttf"
         android:textSize="20sp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="160sp"
+        android:layout_width="190sp"
         android:layout_height="60sp"
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button"
@@ -56,12 +58,14 @@
         android:background="@drawable/mybutton"
         android:onClick="multiPlay"
         android:text="Multiplayer"
+        android:drawableLeft="@drawable/ic_users"
+        android:paddingLeft="10dp"
         android:fontFamily="assets/round.ttf"
         android:textSize="20sp" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="160sp"
+        android:layout_width="190sp"
         android:layout_height="60sp"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
@@ -72,6 +76,8 @@
         android:onClick="settings"
         android:fontFamily="assets/round.ttf"
         android:text="Settngs"
+        android:drawableLeft="@drawable/ic_settings"
+        android:paddingLeft="10dp"
         android:textSize="20sp" />
 
 
@@ -84,7 +90,7 @@
         android:layout_below="@+id/button3"
         android:layout_marginTop="11dp"
         android:onClick="like"
-        android:src="@drawable/like"
+        android:src="@drawable/ic_like"
         app:cb_color="#000000"
         app:cb_pressedRingWidth="8dip" />
 
@@ -97,7 +103,7 @@
         android:layout_marginTop="40sp"
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:onClick="share"
-        android:src="@drawable/share"
+        android:src="@drawable/ic_share"
         app:cb_color="#000000"
         app:cb_pressedRingWidth="8dip" />
 
@@ -109,7 +115,7 @@
         android:layout_alignRight="@+id/textView"
         android:layout_alignTop="@+id/circleButton"
         android:onClick="info"
-        android:src="@drawable/info"
+        android:src="@drawable/ic_info"
         app:cb_color="#000000"
         app:cb_pressedRingWidth="8dip" />
 

@@ -127,7 +127,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="189dp"
-            app:srcCompat="@drawable/error" />
+            app:srcCompat="@drawable/ic_close" />
 
         <TextView
             android:id="@+id/textView12"
@@ -197,7 +197,7 @@
             android:layout_marginTop="60dp"
             android:background="@drawable/mybutton"
             android:onClick="restartGame"
-            android:src="@drawable/replay" />
+            android:src="@drawable/ic_repaly" />
 
         <ImageButton
             android:id="@+id/button7"
@@ -208,7 +208,7 @@
             android:layout_alignRight="@+id/retHead"
             android:background="@drawable/mybutton"
             android:onClick="mainMenu"
-            android:src="@drawable/pre" />
+            android:src="@drawable/ic_left" />
 
         <TextView
             android:id="@+id/retRoundMsg"
@@ -290,7 +290,7 @@
             android:layout_toLeftOf="@+id/resHead"
             android:layout_toStartOf="@+id/resHead"
             android:onClick="restartGame"
-            android:src="@drawable/replay"
+            android:src="@drawable/ic_repaly"
             app:cb_pressedRingWidth="8dip" />
 
         <at.markushi.ui.CircleButton
@@ -301,7 +301,7 @@
             android:layout_toEndOf="@+id/resHead"
             android:layout_toRightOf="@+id/resHead"
             android:onClick="nextLevel"
-            android:src="@drawable/next"
+            android:src="@drawable/ic_right"
             app:cb_pressedRingWidth="8dip" />
 
 

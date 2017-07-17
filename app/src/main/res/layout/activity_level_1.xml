@@ -128,7 +128,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="189dp"
-            app:srcCompat="@drawable/error" />
+            app:srcCompat="@drawable/ic_close" />
 
         <TextView
             android:id="@+id/textView12"
@@ -206,7 +206,7 @@
             android:id="@+id/button8"
             android:layout_width="80dip"
             android:layout_height="80dip"
-            android:src="@drawable/replay"
+            android:src="@drawable/ic_repaly"
             android:onClick="restartGame"
             android:layout_marginBottom="33dp"
             app:cb_pressedRingWidth="8dip"
@@ -219,7 +219,7 @@
             android:layout_width="80dip"
             android:layout_height="80dip"
             android:onClick="nextLevel"
-            android:src="@drawable/next"
+            android:src="@drawable/ic_right"
             app:cb_pressedRingWidth="8dip"
             android:layout_alignTop="@+id/button8"
             android:layout_toRightOf="@+id/textView14"
@@ -283,7 +283,7 @@
             android:layout_marginTop="60dp"
             android:background="@drawable/mybutton"
             android:onClick="restartGame"
-            android:src="@drawable/replay" />
+            android:src="@drawable/ic_repaly" />
 
         <ImageButton
             android:id="@+id/button7"
@@ -294,7 +294,7 @@
             android:layout_alignRight="@+id/textView9"
             android:background="@drawable/mybutton"
             android:onClick="mainMenu"
-            android:src="@drawable/pre" />
+            android:src="@drawable/ic_left" />
 
         <TextView
             android:id="@+id/textView13"

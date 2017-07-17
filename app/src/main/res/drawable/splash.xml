@@ -7,7 +7,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/flash1"/>
+            android:src="@drawable/brain"/>
     </item>
 
 </layer-list>

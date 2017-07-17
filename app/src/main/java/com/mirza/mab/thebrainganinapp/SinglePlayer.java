@@ -112,7 +112,8 @@ public class SinglePlayer extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case 3:
-                Toast.makeText(getBaseContext(), "level3", Toast.LENGTH_LONG).show();
+                intent = new Intent(this, Level_3.class);
+                startActivity(intent);
                 break;
             case 4:
                 Toast.makeText(getBaseContext(), "level4", Toast.LENGTH_LONG).show();
@@ -165,28 +166,28 @@ public class SinglePlayer extends AppCompatActivity {
                     } else {
                         lock = 1;
                     }
-                    return Levels.newInstance("flash1", 3, lock, stars);
+                    return Levels.newInstance("l3", 3, lock, stars);
                 case 3:
                     if ((pos + 1) <= maxLevel) {
                         lock = 0;
                     } else {
                         lock = 1;
                     }
-                    return Levels.newInstance("flas2", 4, lock, stars);
+                    return Levels.newInstance("l1", 4, lock, stars);
                 case 4:
                     if ((pos + 1) <= maxLevel) {
                         lock = 0;
                     } else {
                         lock = 1;
                     }
-                    return Levels.newInstance("flash1", 5, lock, stars);
+                    return Levels.newInstance("l2", 5, lock, stars);
                 default:
                     if ((pos + 1) <= maxLevel) {
                         lock = 0;
                     } else {
                         lock = 1;
                     }
-                    return Levels.newInstance("flas2", 6, lock, stars);
+                    return Levels.newInstance("l3", 6, lock, stars);
             }
         }
 

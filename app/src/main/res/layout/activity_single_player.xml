@@ -43,12 +43,13 @@
         android:id="@+id/imageView3"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/filled_star"
+        app:srcCompat="@drawable/ic_fstar"
         android:layout_alignTop="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
         android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp" />
+        android:layout_marginStart="13dp"
+        tools:ignore="VectorDrawableCompat" />
 
 
     <com.mirza.mab.thebrainganinapp.PagerContainer
@@ -77,7 +78,7 @@
         android:layout_alignTop="@+id/circleButton2"
         android:background="@drawable/mybutton"
         android:onClick="previous"
-        android:src="@drawable/pre" />
+        android:src="@drawable/ic_left" />
 
     <Button
         android:id="@+id/circleButton2"
@@ -103,7 +104,7 @@
         android:layout_marginRight="21dp"
         android:background="@drawable/mybutton"
         android:onClick="next"
-        android:src="@drawable/next" />
+        android:src="@drawable/ic_right" />
 
 
 </RelativeLayout>

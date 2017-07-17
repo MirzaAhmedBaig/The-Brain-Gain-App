@@ -413,6 +413,9 @@ public class Level_2 extends AppCompatActivity {
                                     resultPan.setVisibility(View.VISIBLE);
                                     roundNo = 2;
                                     playing = false;
+                                    score=0;
+                                    progressStatus=0;
+                                    progressBar.setProgress(0);
                                 }
 
                             } else {

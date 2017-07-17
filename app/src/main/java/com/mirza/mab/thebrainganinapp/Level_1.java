@@ -46,11 +46,11 @@ public class Level_1 extends AppCompatActivity {
     private boolean stop = false, playing = false, lost = false;
     private Handler handler;
     private Thread progressThread;
-    int score = 0;
+    private int score = 0;
     private static int totalRounds = 4;
-    DatabaseHandler dbHandler = SinglePlayer.dbHandler;
-    Typeface type = MainActivity.type;
-    boolean correct = false;
+    private DatabaseHandler dbHandler = SinglePlayer.dbHandler;
+    private Typeface type = MainActivity.type;
+    private boolean correct = false;
 
 
     @Override
@@ -450,6 +450,9 @@ public class Level_1 extends AppCompatActivity {
                             resultPan.setVisibility(View.VISIBLE);
                             roundNo = 4;
                             playing = false;
+                            score=0;
+                            progressStatus=0;
+                            progressBar.setProgress(0);
                             break;
                     }
                 }
