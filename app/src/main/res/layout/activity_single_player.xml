@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back1"
-    android:padding="0dp"
+    android:paddingBottom="40sp"
     tools:context="com.mirza.mab.thebrainganinapp.SinglePlayer">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="37sp"
         android:text="LEVEL 1"
         android:textColor="@color/black"
         android:textSize="40sp"
@@ -28,27 +28,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25sp"
+        android:layout_marginStart="25sp"
+        android:layout_marginTop="15sp"
         android:textAlignment="center"
-        android:paddingTop="3dp"
+        android:paddingTop="3sp"
         android:text="0"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="20sp"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="30dp"
+        android:layout_width="30sp"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_fstar"
         android:layout_alignTop="@+id/textView4"
         android:layout_toRightOf="@+id/textView4"
         android:layout_toEndOf="@+id/textView4"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13sp"
+        android:layout_marginStart="13sp"
         tools:ignore="VectorDrawableCompat" />
 
 
@@ -56,7 +56,7 @@
         android:id="@+id/pager_container"
         android:layout_width="match_parent"
         android:layout_height="350sp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="50sp"
         android:layout_below="@+id/imageView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -66,42 +66,44 @@
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="0dp" />
+            android:layout_margin="0sp" />
     </com.mirza.mab.thebrainganinapp.PagerContainer>
 
     <ImageButton
         android:id="@+id/circleButton1"
-        android:layout_width="60dip"
-        android:layout_height="55dip"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_alignTop="@+id/circleButton2"
+        android:layout_width="60sp"
+        android:layout_height="55sp"
         android:background="@drawable/mybutton"
         android:onClick="previous"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/circleButton2"
+        android:layout_marginStart="21sp"
+        android:layout_marginLeft="21sp"
         android:src="@drawable/ic_left" />
 
     <Button
         android:id="@+id/circleButton2"
-        android:layout_width="150dip"
-        android:layout_height="55dip"
-        android:layout_below="@+id/pager_container"
+        android:layout_width="150sp"
+        android:layout_height="55sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="16sp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/mybutton"
         android:fontFamily="assets/round.ttf"
         android:onClick="play"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:text="Start" />
 
     <ImageButton
         android:id="@+id/circleButton3"
-        android:layout_width="60dip"
-        android:layout_height="55dip"
+        android:layout_width="60sp"
+        android:layout_height="55sp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/circleButton2"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21sp"
+        android:layout_marginRight="21sp"
         android:background="@drawable/mybutton"
         android:onClick="next"
         android:src="@drawable/ic_right" />

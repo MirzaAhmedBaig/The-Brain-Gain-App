@@ -34,6 +34,7 @@ public class SinglePlayer extends AppCompatActivity {
     MessagePane pane;
     Typeface type;
     PagerAdapter adapter;
+    Button start;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,8 @@ public class SinglePlayer extends AppCompatActivity {
         stars = (TextView) findViewById(R.id.textView4);
         mContainer = (PagerContainer) findViewById(R.id.pager_container);
 
+        start=(Button) findViewById(R.id.circleButton2);
+
         pager = mContainer.getViewPager();
         pager.setPageTransformer(true, new ZoomOutPageTransformer());
         addViews();
@@ -58,6 +61,7 @@ public class SinglePlayer extends AppCompatActivity {
         pager.setClipToPadding(false);
         level.setTypeface(type);
         stars.setTypeface(type);
+        start.setTypeface(type);
 
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

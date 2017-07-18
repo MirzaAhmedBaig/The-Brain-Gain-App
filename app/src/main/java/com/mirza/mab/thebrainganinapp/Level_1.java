@@ -8,7 +8,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -17,6 +19,8 @@ import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +47,9 @@ public class Level_1 extends AppCompatActivity {
     private RatingBar ratingBar;
     private int oncePosition = 0, roundNo = 1;
     private int progressStatus = 0;
+    int width;
+    int height;
+    DisplayMetrics displayMetrics;
     private boolean stop = false, playing = false, lost = false;
     private Handler handler;
     private Thread progressThread;
@@ -94,6 +101,11 @@ public class Level_1 extends AppCompatActivity {
         r4.setTypeface(type);
         resultMsg.setTypeface(type);
         progressBar.setMax(1000);
+
+        displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
 
     }
 
@@ -337,11 +349,14 @@ public class Level_1 extends AppCompatActivity {
 
             final Button button;
             final Button correctButton;
+            int w,h;
+            w=(width/7)-12;
+            h=(height/12)-15;
             if (convertView == null) {
                 button = new Button(mContext);
                 correctButton = new Button(mContext);
-                button.setLayoutParams(new GridView.LayoutParams(85, 85));
-                correctButton.setLayoutParams(new GridView.LayoutParams(85, 85));
+                button.setLayoutParams(new GridView.LayoutParams(w, h));
+                correctButton.setLayoutParams(new GridView.LayoutParams(w, h));
             } else {
                 button = (Button) convertView;
                 correctButton = (Button) convertView;
@@ -356,8 +371,8 @@ public class Level_1 extends AppCompatActivity {
                 button.setText(value);
             }
 
-            button.setTextSize(16);
-            correctButton.setTextSize(16);
+            button.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
+            correctButton.setTextSize(TypedValue.COMPLEX_UNIT_SP,16);
             int resID = getResources().getIdentifier("button", "drawable", "com.mirza.mab.thebrainganinapp");
             button.setBackgroundResource(resID);
             correctButton.setBackgroundResource(resID);

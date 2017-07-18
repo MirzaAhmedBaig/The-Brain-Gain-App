@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,9 @@ public class Level_3 extends AppCompatActivity {
     private Thread progressThread;
     private DatabaseHandler dbHandler = SinglePlayer.dbHandler;
     private Typeface type;
+    int width;
+    int height;
+    DisplayMetrics displayMetrics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -314,6 +318,9 @@ public class Level_3 extends AppCompatActivity {
         public View getView(final int position, final View convertView, final ViewGroup parent) {
 
             final Button button;
+            int w, h;
+            w = (width / 4) - 28;
+            h = (height / 6) - 35;
             button = new Button(mContext);
 
             int resID = getResources().getIdentifier("button", "drawable", "com.mirza.mab.thebrainganinapp");
@@ -322,7 +329,7 @@ public class Level_3 extends AppCompatActivity {
             button.setTextColor(Color.rgb(10, 10, 10));
             button.setTextSize(35);
             button.setFocusable(false);
-            button.setLayoutParams(new GridView.LayoutParams(150, 160));
+            button.setLayoutParams(new GridView.LayoutParams(w, h));
             button.setBackgroundResource(resID);
 
             button.setOnClickListener(new View.OnClickListener() {

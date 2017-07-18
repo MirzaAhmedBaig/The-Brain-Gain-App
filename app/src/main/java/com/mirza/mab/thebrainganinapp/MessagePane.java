@@ -2,6 +2,7 @@ package com.mirza.mab.thebrainganinapp;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +20,7 @@ public class MessagePane extends Dialog implements android.view.View.OnClickList
     public Button ok;
     public TextView msg,head;
     private String message, title;
+    Typeface type;
 
     public MessagePane(Activity a,String title, String msg) {
         super(a);
@@ -35,8 +37,13 @@ public class MessagePane extends Dialog implements android.view.View.OnClickList
         head = (TextView) findViewById(R.id.title);
         msg = (TextView) findViewById(R.id.message);
         ok = (Button) findViewById(R.id.btn_ok);
+        type = Typeface.createFromAsset(c.getAssets(), "round.ttf");
         head.setText(title);
         msg.setText(message);
+        head.setTypeface(type);
+        msg.setTypeface(type);
+        ok.setTypeface(type);
+
         ok.setOnClickListener(this);
     }
 

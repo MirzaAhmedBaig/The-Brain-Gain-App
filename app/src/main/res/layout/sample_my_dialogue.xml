@@ -20,7 +20,8 @@
         android:text="Game Paused"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
+        android:textAllCaps="true"
         android:textStyle="bold" />
 
 
@@ -35,7 +36,9 @@
         android:clickable="true"
         android:fontFamily="assets/round.ttf"
         android:text="Resume"
-        android:textSize="15dp"
+        android:textSize="15sp"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <Button
@@ -49,10 +52,12 @@
         android:layout_below="@+id/btn_no"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
+        android:textAllCaps="true"
         android:background="@drawable/mybutton"
         android:fontFamily="assets/round.ttf"
         android:text="Restart"
-        android:textSize="15dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <Button
@@ -67,7 +72,9 @@
         android:background="@drawable/mybutton"
         android:fontFamily="assets/round.ttf"
         android:text="Main Menu"
-        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textAllCaps="true"
         android:textStyle="bold" />
 
 </RelativeLayout>
