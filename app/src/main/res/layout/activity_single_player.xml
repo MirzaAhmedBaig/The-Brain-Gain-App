@@ -58,6 +58,7 @@
         android:layout_height="350sp"
         android:layout_marginTop="50sp"
         android:layout_below="@+id/imageView3"
+        android:layout_above="@+id/circleButton2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 

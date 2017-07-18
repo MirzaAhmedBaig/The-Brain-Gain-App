@@ -80,8 +80,7 @@
         android:id="@+id/frame2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:weightSum="1">
+        android:visibility="gone">
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -148,6 +147,7 @@
         android:id="@+id/resultPan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="40sp"
         android:visibility="gone">
 
         <TextView
@@ -174,57 +174,69 @@
             android:text="CONGRATS!"
             android:textAlignment="center"
             android:textColor="@color/lightText"
+            android:layout_marginBottom="30sp"
             android:textSize="35sp" />
 
-        <RatingBar
-            android:id="@+id/congoRatingBar"
-            style="@style/CongoRatingBar"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/pane"
+            android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/textView15"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:clickable="false"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:stepSize="1" />
+            android:layout_centerHorizontal="true">
+
+            <RatingBar
+                android:id="@+id/congoRatingBar"
+                style="@style/CongoRatingBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:clickable="false"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="1" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/congoRatingBar"
+            android:layout_below="@+id/pane"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="86dp"
             android:text="Be faster for more stars!"
             android:textColor="@color/lightText"
             android:textSize="25sp" />
 
-        <at.markushi.ui.CircleButton
-            android:id="@+id/button8"
-            android:layout_width="80dip"
-            android:layout_height="80dip"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="33dp"
-            android:layout_toLeftOf="@+id/textView14"
-            android:layout_toStartOf="@+id/textView14"
-            android:onClick="restartGame"
-            android:src="@drawable/ic_repaly"
-            app:cb_pressedRingWidth="8dip" />
 
-        <at.markushi.ui.CircleButton
+        <ImageButton
+            android:id="@+id/button8"
+            android:layout_width="60dip"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/mybutton"
+            android:onClick="restartGame"
+            android:src="@drawable/ic_repaly" />
+
+        <ImageButton
             android:id="@+id/button9"
-            android:layout_width="80dip"
-            android:layout_height="80dip"
-            android:layout_alignTop="@+id/button8"
-            android:layout_toEndOf="@+id/textView14"
-            android:layout_toRightOf="@+id/textView14"
+            android:layout_width="60dip"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20sp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/mybutton"
             android:onClick="nextLevel"
-            android:src="@drawable/ic_right"
-            app:cb_pressedRingWidth="8dip" />
+            android:src="@drawable/ic_right" />
 
 
     </RelativeLayout>
@@ -233,6 +245,7 @@
         android:id="@+id/retryPan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="40sp"
         android:visibility="gone">
 
         <TextView
@@ -278,9 +291,9 @@
             android:id="@+id/button5"
             android:layout_width="60dip"
             android:layout_height="50dip"
-            android:layout_alignLeft="@+id/textView9"
-            android:layout_alignStart="@+id/textView9"
-            android:layout_below="@+id/textView11"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20sp"
             android:layout_marginTop="60dp"
             android:background="@drawable/mybutton"
             android:onClick="restartGame"
@@ -290,9 +303,10 @@
             android:id="@+id/button7"
             android:layout_width="60dip"
             android:layout_height="50dip"
-            android:layout_alignBottom="@+id/button5"
-            android:layout_alignEnd="@+id/textView9"
-            android:layout_alignRight="@+id/textView9"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20sp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/mybutton"
             android:onClick="mainMenu"
             android:src="@drawable/ic_left" />

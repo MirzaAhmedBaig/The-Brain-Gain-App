@@ -161,6 +161,7 @@ public class Level_1 extends AppCompatActivity {
                                         progressBar.setProgress(progressStatus);
                                         if (progressStatus == 1000) {
                                             if (!lost) {
+                                                r4.setText("Time is up!");
                                                 onError(1);
                                             }
                                             stop = true;
@@ -201,6 +202,7 @@ public class Level_1 extends AppCompatActivity {
                                         progressBar.setProgress(progressStatus);
                                         if (progressStatus == 1000) {
                                             if (!lost) {
+                                                r4.setText("Time is up!");
                                                 onError(2);
                                             }
                                             stop = true;
@@ -240,6 +242,7 @@ public class Level_1 extends AppCompatActivity {
                                         progressBar.setProgress(progressStatus);
                                         if (progressStatus == 1000) {
                                             if (!lost) {
+                                                r4.setText("Time is up!");
                                                 onError(3);
                                             }
                                             stop = true;
@@ -279,6 +282,7 @@ public class Level_1 extends AppCompatActivity {
                                         progressBar.setProgress(progressStatus);
                                         if (progressStatus == 1000) {
                                             if (!lost) {
+                                                r4.setText("Time is up!");
                                                 onError(4);
                                             }
                                             stop = true;
@@ -351,7 +355,7 @@ public class Level_1 extends AppCompatActivity {
             final Button correctButton;
             int w,h;
             w=(width/7)-12;
-            h=(height/12)-15;
+            h=(height/12)-20;
             if (convertView == null) {
                 button = new Button(mContext);
                 correctButton = new Button(mContext);
@@ -390,6 +394,7 @@ public class Level_1 extends AppCompatActivity {
                     colorAnim.setRepeatCount(ValueAnimator.INFINITE);
                     colorAnim.setRepeatMode(ValueAnimator.REVERSE);
                     colorAnim.start();
+                    r4.setText("You tapped the wrong number");
                     onError(roundNo);
                 }
             });

@@ -47,6 +47,7 @@
         android:clickable="true"
         android:gravity="center"
         android:text="OK"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_below="@+id/message"

@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
     private Space space;
     public static Typeface type;
     private Info inf;
+    MessagePane pane;
     private DatabaseHandler dbHandler = SinglePlayer.dbHandler;
     int width;
     int height;
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
     }
 
     public void onViewInitialized() {
-        baseContext=findViewById(R.id.baseContext);
+        baseContext = findViewById(R.id.baseContext);
         heading = (TextView) findViewById(R.id.textView);
         subHeading = (TextView) findViewById(R.id.textView3);
         splay = (Button) findViewById(R.id.button);
@@ -72,21 +73,22 @@ public class MainActivity extends Activity {
     }
 
     public void multiPlay(View v) {
-
+        pane = new MessagePane(MainActivity.this, "App in progress!", "Thanks for testing my app. I will soo add this functionality.");
+        pane.show();
     }
 
     public void settings(View v) {
-//        Intent intent=new Intent(this,MultiPlayer.class);
-//        startActivity(intent);
-
+        pane = new MessagePane(MainActivity.this, "App in progress!", "Thanks for testing my app. I will soo add this functionality.");
+        pane.show();
     }
 
     public void like(View v) {
-
+        pane = new MessagePane(MainActivity.this, "App in progress!", "Thanks for testing my app. I will soo add this functionality.");
+        pane.show();
     }
 
     public void info(View v) {
-        inf=new Info(this);
+        inf = new Info(this);
         inf.show();
 
     }
@@ -94,7 +96,7 @@ public class MainActivity extends Activity {
     public void share(View view) {
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
         intent.setType("text/plain");
-        String shareBodyText = "I love The Brain Twist App...! \n This is the best game i ever played.\nhttps://drive.google.com/open?id=0By5B0_-J_O5tWTY3NkFKVkx5ZHM";
+        String shareBodyText = "I love The Brain Twist App...! \nThis is the best game to boost your brain ability.\nDownload it from here\nhttps://drive.google.com/open?id=0By5B0_-J_O5tWTY3NkFKVkx5ZHM";
         intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "The Brain Gain App");
         intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
         startActivity(Intent.createChooser(intent, "Choose sharing method"));

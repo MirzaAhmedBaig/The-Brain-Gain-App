@@ -130,6 +130,11 @@ public class Level_4 extends AppCompatActivity {
 
         progressBar.setMax(1000);
 
+        displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
+
         randomStart=(int)pos;
         if(randomStart<2){
             randomStart=2;
@@ -194,6 +199,7 @@ public class Level_4 extends AppCompatActivity {
                                         progressBar.setProgress(progressStatus);
                                         if (progressStatus == 1000) {
                                             if (!lost) {
+                                                retsubHead.setText("Time is up!");
                                                 onError(1);
                                             }
                                             stop = true;
@@ -238,6 +244,7 @@ public class Level_4 extends AppCompatActivity {
                                         progressBar.setProgress(progressStatus);
                                         if (progressStatus == 1000) {
                                             if (!lost) {
+                                                retsubHead.setText("Time is up!");
                                                 onError(2);
                                             }
                                             stop = true;
@@ -385,6 +392,7 @@ public class Level_4 extends AppCompatActivity {
                                         break;
                                     }
                                 }
+                                retsubHead.setText("You tapped the wrong number");
                                 onError(roundNo);
                             }
                             break;
@@ -454,6 +462,7 @@ public class Level_4 extends AppCompatActivity {
                                         break;
                                     }
                                 }
+                                retsubHead.setText("You tapped the wrong number");
                                 onError(roundNo);
                             }
                             break;

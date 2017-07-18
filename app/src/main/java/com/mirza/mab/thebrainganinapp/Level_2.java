@@ -179,7 +179,7 @@ public class Level_2 extends AppCompatActivity {
                                 }
                                 progressStatus += 1;
                                 try {
-                                    Thread.sleep(30);
+                                    Thread.sleep(60);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -190,6 +190,7 @@ public class Level_2 extends AppCompatActivity {
                                         progressBar.setProgress(progressStatus);
                                         if (progressStatus == 1000) {
                                             if (!lost) {
+                                                retsubHead.setText("Time is up!");
                                                 onError(1);
                                             }
                                             stop = true;
@@ -223,7 +224,7 @@ public class Level_2 extends AppCompatActivity {
                                 }
                                 progressStatus += 1;
                                 try {
-                                    Thread.sleep(30);
+                                    Thread.sleep(60);
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
@@ -234,6 +235,7 @@ public class Level_2 extends AppCompatActivity {
                                         progressBar.setProgress(progressStatus);
                                         if (progressStatus == 1000) {
                                             if (!lost) {
+                                                retsubHead.setText("Time is up!");
                                                 onError(2);
                                             }
                                             stop = true;
@@ -383,6 +385,7 @@ public class Level_2 extends AppCompatActivity {
                                         break;
                                     }
                                 }
+                                retsubHead.setText("You tapped the wrong number");
                                 onError(roundNo);
                             }
                             break;
@@ -452,6 +455,7 @@ public class Level_2 extends AppCompatActivity {
                                         break;
                                     }
                                 }
+                                retsubHead.setText("You tapped the wrong number");
                                 onError(roundNo);
                             }
                             break;
